@@ -1,0 +1,27 @@
+Quick Bite. 
+SQL query provides 5 closest restaurants, 
+with Google Maps directions. 
+Get lat/long from Google Places API, 
+seeder to populate DB with restaurants or use other API like Yelp?
+
+
+quickbite
+   [1,2,3,4,5, esc]
+   
+quickbite 1 (2 | 3 | 4 | 5)
+
+
+
+yargs
+https://www.npmjs.com/package/yargs
+chalk
+https://www.npmjs.com/package/chalk
+winston
+https://www.npmjs.com/package/winston
+
+
+communicate with DB
+nice design
+helpful menus
+clean error messages and outputs
+loading indicators and progress bars
