@@ -5,9 +5,12 @@ Get lat/long from Google Places API,
 seeder to populate DB with restaurants or use other API like Yelp?
 
 
+
+list restaurants, give directions to restaurant 
+
 quickbite
    [1,2,3,4,5, esc]
-   
+
 quickbite 1 (2 | 3 | 4 | 5)
 
 
@@ -18,6 +21,12 @@ chalk
 https://www.npmjs.com/package/chalk
 winston
 https://www.npmjs.com/package/winston
+
+best practices 
+https://github.com/lirantal/nodejs-cli-apps-best-practices
+package node into executable 
+https://github.com/vercel/pkg
+upload to npm
 
 
 communicate with DB
