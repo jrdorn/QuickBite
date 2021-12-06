@@ -28,8 +28,27 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`quickbite goodbye`](#quickbite-goodbye)
 * [`quickbite hello`](#quickbite-hello)
 * [`quickbite help [COMMAND]`](#quickbite-help-command)
+
+## `quickbite goodbye`
+
+Describe the command here
+
+```
+USAGE
+  $ quickbite goodbye
+
+OPTIONS
+  -n, --name=name  name to print
+
+DESCRIPTION
+  ...
+  Extra documentation goes here
+```
+
+_See code: [src/commands/goodbye.js](https://github.com/jrdorn/QuickBite/blob/v0.0.0/src/commands/goodbye.js)_
 
 ## `quickbite hello`
 
