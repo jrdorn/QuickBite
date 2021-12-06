@@ -14,8 +14,10 @@ axios({
   .then((res) => {
     const quote = res.data.contents.quotes[0].quote;
     const author = res.data.contents.quotes[0].author;
-    const log = chalk.green(`${quote} - ${author}`);
+    const log = chalk.cyan(`${quote} - ${author}`);
     console.log(log);
+    const arg = chalk.magenta(process.argv);
+    console.log(arg);
   })
   .catch((err) => {
     const log = chalk.blue(err);
