@@ -4,11 +4,11 @@ class HelloCommand extends Command {
   async run() {
     const { flags } = this.parse(HelloCommand);
     const name = flags.name || "world";
-    this.log(`hello ${name} from ./src/commands/hello.js`);
+    this.log(`\nhello ${name} from ./src/commands/hello.js\n`);
   }
 }
 
-HelloCommand.description = `Describe the command here
+HelloCommand.description = `Say hello from file location
 ...
 Extra documentation goes here
 `;

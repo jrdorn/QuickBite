@@ -2,11 +2,11 @@ const { Command, flags } = require("@oclif/command");
 
 class GoodbyeCommand extends Command {
   async run() {
-    this.log(`goodbye world!`);
+    this.log(`\ngoodbye world!\n`);
   }
 }
 
-GoodbyeCommand.description = `Describe the command here
+GoodbyeCommand.description = `Say goodbye
 ...
 Extra documentation goes here
 `;
