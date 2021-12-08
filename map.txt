@@ -1,8 +1,20 @@
 Quick Bite. 
-SQL query provides 5 closest restaurants, 
-with Google Maps directions. 
-Get lat/long from Google Places API, 
-seeder to populate DB with restaurants or use other API like Yelp?
+
+ASCII art
+
+get user's lat/long from Google Places API
+
+seeder to populate DB with restaurants/ use Yelp or other API 
+
+SQL query for 5 closest restaurants 
+
+Print restaurant names to terminal, user has option to select one or esc
+
+Google Maps walking directions listed for restaurants if close (30min walking?)
+   if no restaurants in walking distance, print err 
+   or if <5 are within walking distance
+
+
 
 
 
@@ -14,19 +26,19 @@ quickbite
 quickbite 1 (2 | 3 | 4 | 5)
 
 
+options, flags?
+--help cannot be overridden
 
-yargs
-https://www.npmjs.com/package/yargs
-chalk
-https://www.npmjs.com/package/chalk
-winston
-https://www.npmjs.com/package/winston
+
+
+
 
 best practices 
 https://github.com/lirantal/nodejs-cli-apps-best-practices
 package node into executable 
 https://github.com/vercel/pkg
-upload to npm
+register and upload with npm
+https://docs.npmjs.com/cli/v8/configuring-npm/package-json
 
 
 communicate with DB
