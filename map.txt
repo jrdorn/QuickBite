@@ -1,8 +1,13 @@
 Quick Bite. 
 
-ASCII art
+|| Purpose
+>>>>>>>>
+??? change purpose of app? get ip, city, top 5 restaurants without directions
 
-get user's lat/long from Google Places API
+get user's geolocation (lat/long)
+   ? potentially serve HTML file? And ask user to allow geolocation
+OR 
+   ask user to manually enter their address, and check for errors
 
 seeder to populate DB with restaurants/ use Yelp or other API 
 
@@ -14,16 +19,36 @@ Google Maps walking directions listed for restaurants if close (30min walking?)
    if no restaurants in walking distance, print err 
    or if <5 are within walking distance
 
-
-
-
-
-list restaurants, give directions to restaurant 
-
+   list restaurants, give directions to restaurant 
 quickbite
    [1,2,3,4,5, esc]
-
 quickbite 1 (2 | 3 | 4 | 5)
+>>>>>>>
+
+Original plan isn't efficient- difficulty of determining user's exact address to provide walking directions,
+also doesn't really seem like the best use case for a CLI
+
+
+What would be useful and make sense?
+
+Fitness tracker
+  count calories
+  set reminders, calendar alerts
+  
+Tell you how healthy something is?
+  Choose from list of options
+  Count calories, give percentages
+  Enter height/ weight/ etc and say this is X amount of what you need for today
+
+Something with geolocation
+  Inaccurate, so just find out city/ state
+  Healthiest restaurants in the city
+
+
+
+
+
+
 
 
 options, flags?
@@ -49,11 +74,23 @@ loading indicators and progress bars
 
 
 
+===Packages===
 
 Commander
 
 Chalk
 https://www.npmjs.com/package/chalk
+
+inquirer
+
+DotEnv
+https://github.com/motdotla/dotenv
+
+Geoip
+https://github.com/geoip-lite/node-geoip
+
+=== ===
+
 
 
 

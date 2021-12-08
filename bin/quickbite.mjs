@@ -3,6 +3,16 @@
 import chalk from "chalk";
 import { cli } from "../src/index.mjs";
 import { Command } from "commander/esm.mjs";
+
+import dotenv from "dotenv"; //store API keys in the environment
+const config = dotenv.config();
+if (config.error) {
+  throw config.error;
+}
+// console.log(config.parsed.MAPS_KEY);
+
+//get IPv6, OS specific
+
 const program = new Command();
 
 program
@@ -13,7 +23,7 @@ program.parse();
 
 const options = program.opts();
 console.log(
-  chalk.green(`\n
+  chalk.yellow(`\n
 🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
 
  _____           _           _      _____    _    _          
@@ -27,5 +37,6 @@ console.log(
 
 \n`)
 );
+
 // cli(chalk.yellow(process.argv[2]));
 if (options.peppers) console.log("peppers");
