@@ -3,9 +3,9 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Provide directions to 5 restaurants within walking distance",
-  "main": "index.mjs",
+  "main": "src/index.mjs",
   "bin": {
-    "quickbite": "bin/index.mjs"
+    "quickbite": "bin/quickbite.mjs"
   },
   "publishConfig": {
     "access": "public"
@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/jrdorn/QuickBite#readme",
   "dependencies": {
+    "chalk": "^5.0.0",
     "commander": "^8.3.0"
   }
 }

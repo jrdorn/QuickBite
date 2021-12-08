@@ -46,3 +46,17 @@ nice design
 helpful menus
 clean error messages and outputs
 loading indicators and progress bars
+
+
+
+
+Commander
+
+Chalk
+https://www.npmjs.com/package/chalk
+
+
+
+Design inspo
+https://bit.ly/3y69QpN
+https://bit.ly/3puJytq
