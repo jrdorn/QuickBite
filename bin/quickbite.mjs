@@ -24,7 +24,6 @@ program.parse();
 const options = program.opts();
 console.log(
   chalk.yellow(`\n
-🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
 
  _____           _           _      _____    _    _          
 |     |   _ _   |_|   ___   | |_   | __  |  |_|  | |_    ___ 
@@ -33,20 +32,76 @@ console.log(
    |__|                                                                            
 
 
-🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
 
 \n`)
 );
 
+//////////////////////////////////////////////////
+//||Tests
+
+//wifi geolocation
+import fetch from "node-fetch";
+import wifiscanner from "node-wifiscanner";
+
+//find MAC addresses of nearby WiFi access points
+const getMACAddress = () => {
+  wifiscanner.scan((err, data) => {
+    if (err) {
+      return console.log(`Error: ${err}`);
+    }
+
+    //format MAC addresses for Google Geolocation API
+    let macs = data.map((a) => {
+      let macsObj = {};
+      //WiFi access point objects must have macAddress field
+      macsObj["macAddress"] = a.mac;
+      return macsObj;
+    });
+    return getCoords(macs);
+  });
+};
+
+const getCoords = (macAddress) => {
+  let body = {
+    considerIp: "false",
+    wifiAccessPoints: macAddress,
+  };
+  //send POST request to API
+  fetch(
+    `https://www.googleapis.com/geolocation/v1/geolocate?key=${config.parsed.MAPS_KEY}`,
+    {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      //serialize body value
+      body: JSON.stringify(body),
+    }
+  )
+    .then((res) => res.json())
+    .then((json, err) => {
+      if (err) {
+        console.log(`Error: ${err}`);
+      } else {
+        console.log(json.location);
+      }
+    });
+};
+
+getMACAddress();
+
 //sample animation
-var twirlTimer = (function () {
-  var P = ["\\", "|", "/", "-"];
-  var x = 0;
-  return setInterval(function () {
-    process.stdout.write("\r" + P[x++]);
-    x &= 3;
-  }, 250);
-})();
+// const twirlTimer = () => {
+//   const P = ["\\", "|", "/", "-"];
+//   let x = 0;
+//   return setInterval(function () {
+//     process.stdout.write("\r" + P[x++]);
+//     x &= 3;
+//   }, 250);
+// };
+// twirlTimer();
+//////////////////////////////////////////////////
 
 // cli(chalk.yellow(process.argv[2]));
 if (options.peppers) console.log("peppers");

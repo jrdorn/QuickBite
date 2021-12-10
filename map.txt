@@ -1,11 +1,12 @@
 Quick Bite. 
 
-|| Purpose
+|| Brainstorming
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ??? change purpose of app? get ip, city, top 5 restaurants without directions
 
 get user's geolocation (lat/long)
-   ? potentially serve HTML file? And ask user to allow geolocation
+   potentially serve HTML file and ask user to allow geolocation
+   wifi trilateration (determine device location based on its distance from several WiFi access points)
 OR 
    ask user to manually enter their address, and check for errors
 
@@ -36,8 +37,6 @@ Donation app
   Get geolocation and show local food pantries to volunteer at (food banks on Google)
      Rough approximation then allow user to override it via input
 
-
-
 Fitness tracker
   count calories
   set reminders, calendar alerts
@@ -61,7 +60,7 @@ Compare what's healthier?
 
 Build a burger (or pizza or salad)
 
-
+Or, try to use different method of geolocation (wifi, html5) other than ip for original idea
 
 
 
@@ -90,22 +89,6 @@ loading indicators and progress bars
 
 
 
-===Packages===
-
-Commander
-
-Chalk
-https://www.npmjs.com/package/chalk
-
-inquirer
-
-DotEnv
-https://github.com/motdotla/dotenv
-
-Geoip
-https://github.com/geoip-lite/node-geoip
-
-=== ===
 
 
 
@@ -113,3 +96,14 @@ https://github.com/geoip-lite/node-geoip
 Design inspo
 https://bit.ly/3y69QpN
 https://bit.ly/3puJytq
+
+
+
+|| Notes
+node WifiScanner, only for Linux and Mac?
+  give credit to all projects
+
+>I can't believe it works... I was disheartened when IP wasn't giving my true geolocation,
+and thought doing something odd with HTML5 through a browser would defeat my exercise
+in using NodeJS to get location. But I wondered how Google Maps gets my true location online,
+found out they use WiFi trilateration, and easily implemented it 
