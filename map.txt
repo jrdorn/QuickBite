@@ -1,7 +1,7 @@
 Quick Bite. 
 
 || Purpose
->>>>>>>>
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ??? change purpose of app? get ip, city, top 5 restaurants without directions
 
 get user's geolocation (lat/long)
@@ -23,13 +23,20 @@ Google Maps walking directions listed for restaurants if close (30min walking?)
 quickbite
    [1,2,3,4,5, esc]
 quickbite 1 (2 | 3 | 4 | 5)
->>>>>>>
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 Original plan isn't efficient- difficulty of determining user's exact address to provide walking directions,
 also doesn't really seem like the best use case for a CLI
 
-
 What would be useful and make sense?
+
+
+Donation app
+  Pick from list of charities to donate to that are devoted to ending hunger
+  Get geolocation and show local food pantries to volunteer at (food banks on Google)
+     Rough approximation then allow user to override it via input
+
+
 
 Fitness tracker
   count calories
@@ -44,6 +51,15 @@ Something with geolocation
   Inaccurate, so just find out city/ state
   Healthiest restaurants in the city
 
+Simple recipes app
+  Give simple, cheap, healthy recipes to users
+  Ask what they're in the mood for, or wildcard
+  less than 10 steps? less than X USD?
+
+Compare what's healthier?
+  Pizza vs kale, kale vs oranges
+
+Build a burger (or pizza or salad)
 
 
 
@@ -54,8 +70,8 @@ Something with geolocation
 options, flags?
 --help cannot be overridden
 
-
-
+sound effects?
+animations?
 
 
 best practices 
