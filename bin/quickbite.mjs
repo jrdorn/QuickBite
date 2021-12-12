@@ -24,13 +24,13 @@ program.parse();
 const options = program.opts();
 console.log(
   chalk.yellow(`\n
-
- _____           _           _      _____    _    _          
-|     |   _ _   |_|   ___   | |_   | __  |  |_|  | |_    ___ 
-|  |  |  | | |  | |  |  _|  | '_|  | __ -|  | |  |  _|  | -_|
-|__  _|  |___|  |_|  |___|  |_,_|  |_____|  |_|  |_|    |___|
-   |__|                                                                            
-
+ --------------------------------------------------------------
+|  _____           _           _      _____    _    _           |
+| |     |   _ _   |_|   ___   | |_   | __  |  |_|  | |_    ___  |
+| |  |  |  | | |  | |  |  _|  | '_|  | __ -|  | |  |  _|  | -_| |
+| |__  _|  |___|  |_|  |___|  |_,_|  |_____|  |_|  |_|    |___| |
+|    |__|                                                       |                    
+ --------------------------------------------------------------
 
 
 \n`)
@@ -43,9 +43,11 @@ console.log(
 import fetch from "node-fetch";
 import wifiscanner from "node-wifiscanner";
 
+// TODO: RETURN STREET ADDRESS ////////////////////////////////////////////////
+
 //find MAC addresses of nearby WiFi access points
-const getMACAddress = async () => {
-  return await wifiscanner.scan((err, data) => {
+const getMACAddress = () => {
+  return wifiscanner.scan((err, data) => {
     if (err) {
       return console.log(`Error: ${err}`);
     }
@@ -86,25 +88,24 @@ const getCoords = (macAddress) => {
       if (err) {
         console.log(`Error: ${err}`);
       } else {
-        return json.location;
+        console.log(json.location);
       }
     });
 };
 
-let maia = await getMACAddress();
-console.log(maia);
+getMACAddress();
 
 //reverse geocoding - lookup address given lat/lng
 
 //sample animation
-// (function twirlTimer() {
+// function twirlTimer() {
 //   const P = ["\\", "|", "/", "-"];
 //   let x = 0;
 //   return setInterval(function () {
 //     process.stdout.write("\r" + P[x++]);
 //     x &= 3;
 //   }, 250);
-// })();
+// }
 //////////////////////////////////////////////////
 
 // cli(chalk.yellow(process.argv[2]));
