@@ -107,3 +107,11 @@ node WifiScanner, only for Linux and Mac?
 and thought doing something odd with HTML5 through a browser would defeat my exercise
 in using NodeJS to get location. But I wondered how Google Maps gets my true location online,
 found out they use WiFi trilateration, and easily implemented it 
+
+
+README inspo
+https://github.com/mattplichtawild/cli-animal-toy-browser
+https://www.npmjs.com/package/uber-cli
+
+
+Reverse geocoding (address lookup)

@@ -44,8 +44,8 @@ import fetch from "node-fetch";
 import wifiscanner from "node-wifiscanner";
 
 //find MAC addresses of nearby WiFi access points
-const getMACAddress = () => {
-  wifiscanner.scan((err, data) => {
+const getMACAddress = async () => {
+  return await wifiscanner.scan((err, data) => {
     if (err) {
       return console.log(`Error: ${err}`);
     }
@@ -57,8 +57,10 @@ const getMACAddress = () => {
       macsObj["macAddress"] = a.mac;
       return macsObj;
     });
+    // console.log(2);
     return getCoords(macs);
   });
+  // console.log(3);
 };
 
 const getCoords = (macAddress) => {
@@ -84,24 +86,26 @@ const getCoords = (macAddress) => {
       if (err) {
         console.log(`Error: ${err}`);
       } else {
-        console.log(json.location);
+        return json.location;
       }
     });
 };
 
-getMACAddress();
+let maia = await getMACAddress();
+console.log(maia);
+
+//reverse geocoding - lookup address given lat/lng
 
 //sample animation
-// const twirlTimer = () => {
+// (function twirlTimer() {
 //   const P = ["\\", "|", "/", "-"];
 //   let x = 0;
 //   return setInterval(function () {
 //     process.stdout.write("\r" + P[x++]);
 //     x &= 3;
 //   }, 250);
-// };
-// twirlTimer();
+// })();
 //////////////////////////////////////////////////
 
 // cli(chalk.yellow(process.argv[2]));
-if (options.peppers) console.log("peppers");
+// if (options.peppers) console.log("peppers");
