@@ -46,8 +46,26 @@ import wifiscanner from "node-wifiscanner";
 // TODO: RETURN STREET ADDRESS ////////////////////////////////////////////////
 
 //find MAC addresses of nearby WiFi access points
-const getMACAddress = () => {
-  return wifiscanner.scan((err, data) => {
+// const getMACAddress = async () => {
+//   return await wifiscanner.scan((err, data) => {
+//     if (err) {
+//       return console.log(`Error: ${err}`);
+//     }
+
+//     //format MAC addresses for Google Geolocation API
+//     let macs = data.map((a) => {
+//       let macsObj = {};
+//       //WiFi access point objects must have macAddress field
+//       macsObj["macAddress"] = a.mac;
+//       return macsObj;
+//     });
+//     //
+//     return macs;
+//     // return getCoords(macs);
+//   });
+// };
+const getMACAddress = async () => {
+  const answer = await wifiscanner.scan((err, data) => {
     if (err) {
       return console.log(`Error: ${err}`);
     }
@@ -59,19 +77,25 @@ const getMACAddress = () => {
       macsObj["macAddress"] = a.mac;
       return macsObj;
     });
-    // console.log(2);
-    return getCoords(macs);
+    //
+    return macs;
+    // return getCoords(macs);
   });
-  // console.log(3);
+  return answer;
 };
 
-const getCoords = (macAddress) => {
+(async () => {
+  const ans = await getMACAddress();
+  console.log(ans);
+})();
+
+const getCoords = async (macAddress) => {
   let body = {
     considerIp: "false",
     wifiAccessPoints: macAddress,
   };
   //send POST request to API
-  fetch(
+  await fetch(
     `https://www.googleapis.com/geolocation/v1/geolocate?key=${config.parsed.MAPS_KEY}`,
     {
       method: "post",
@@ -88,12 +112,10 @@ const getCoords = (macAddress) => {
       if (err) {
         console.log(`Error: ${err}`);
       } else {
-        console.log(json.location);
+        return json.location;
       }
     });
 };
-
-getMACAddress();
 
 //reverse geocoding - lookup address given lat/lng
 
