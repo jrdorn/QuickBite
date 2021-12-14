@@ -100,7 +100,7 @@ https://bit.ly/3puJytq
 
 
 || Notes
-node WifiScanner, only for Linux and Mac?
+node WifiScanner, (mac airpot, linux iwlist, windows netsh)
   give credit to all projects
 
 >I can't believe it works... I was disheartened when IP wasn't giving my true geolocation,

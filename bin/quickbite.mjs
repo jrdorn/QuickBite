@@ -11,8 +11,6 @@ if (config.error) {
 }
 // console.log(config.parsed.MAPS_KEY);
 
-//get IPv6, OS specific
-
 const program = new Command();
 
 program
@@ -46,78 +44,86 @@ import wifiscanner from "node-wifiscanner";
 // TODO: RETURN STREET ADDRESS ////////////////////////////////////////////////
 
 //find MAC addresses of nearby WiFi access points
-// const getMACAddress = async () => {
-//   return await wifiscanner.scan((err, data) => {
-//     if (err) {
-//       return console.log(`Error: ${err}`);
-//     }
-
-//     //format MAC addresses for Google Geolocation API
-//     let macs = data.map((a) => {
-//       let macsObj = {};
-//       //WiFi access point objects must have macAddress field
-//       macsObj["macAddress"] = a.mac;
-//       return macsObj;
-//     });
-//     //
-//     return macs;
-//     // return getCoords(macs);
-//   });
-// };
-const getMACAddress = async () => {
-  const answer = await wifiscanner.scan((err, data) => {
-    if (err) {
-      return console.log(`Error: ${err}`);
-    }
-
-    //format MAC addresses for Google Geolocation API
-    let macs = data.map((a) => {
-      let macsObj = {};
-      //WiFi access point objects must have macAddress field
-      macsObj["macAddress"] = a.mac;
-      return macsObj;
+const getMACAddress = () => {
+  return new Promise((resolve, reject) => {
+    wifiscanner.scan((err, data) => {
+      if (err) {
+        reject(console.log(`Error: ${err}`));
+      } else {
+        //format MAC addresses for Google Geolocation API
+        let macs = data.map((a) => {
+          let macsObj = {};
+          //WiFi access point objects must have macAddress field
+          macsObj["macAddress"] = a.mac;
+          return macsObj;
+        });
+        //
+        resolve(macs);
+      }
     });
-    //
-    return macs;
-    // return getCoords(macs);
   });
-  return answer;
 };
 
-(async () => {
-  const ans = await getMACAddress();
-  console.log(ans);
-})();
-
-const getCoords = async (macAddress) => {
+//find lat/lng of user
+const getCoords = (macAddress) => {
   let body = {
     considerIp: "false",
     wifiAccessPoints: macAddress,
   };
-  //send POST request to API
-  await fetch(
-    `https://www.googleapis.com/geolocation/v1/geolocate?key=${config.parsed.MAPS_KEY}`,
-    {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      //serialize body value
-      body: JSON.stringify(body),
-    }
-  )
-    .then((res) => res.json())
-    .then((json, err) => {
-      if (err) {
-        console.log(`Error: ${err}`);
-      } else {
-        return json.location;
+
+  return new Promise((resolve, reject) => {
+    //send POST request to API
+    fetch(
+      `https://www.googleapis.com/geolocation/v1/geolocate?key=${config.parsed.MAPS_KEY}`,
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        //serialize body value
+        body: JSON.stringify(body),
       }
-    });
+    )
+      .then((res) => res.json())
+      .then((json, err) => {
+        if (err) {
+          reject(console.log(`Error: ${err}`));
+        } else {
+          resolve(json.location);
+        }
+      });
+  });
 };
 
+let myMACs = await getMACAddress();
+let myCoords = await getCoords(myMACs);
+
 //reverse geocoding - lookup address given lat/lng
+const getAddress = (coords) => {
+  return new Promise((resolve, reject) => {
+    fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&key=${config.parsed.MAPS_KEY}`,
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((json, err) => {
+        if (err) {
+          reject(console.log(`Error: ${err}`));
+        } else {
+          resolve(json);
+        }
+      });
+  });
+};
+let add = await getAddress(myCoords);
+await console.log(add.results[0].formatted_address);
 
 //sample animation
 // function twirlTimer() {
