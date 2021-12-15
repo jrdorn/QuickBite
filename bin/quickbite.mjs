@@ -3,13 +3,15 @@
 import chalk from "chalk";
 import { cli } from "../src/index.mjs";
 import { Command } from "commander/esm.mjs";
-
 import dotenv from "dotenv"; //store API keys in the environment
+import fetch from "node-fetch";
+import listr from "listr";
+import wifiscanner from "node-wifiscanner";
+
 const config = dotenv.config();
 if (config.error) {
   throw config.error;
 }
-// console.log(config.parsed.MAPS_KEY);
 
 const program = new Command();
 
@@ -35,13 +37,8 @@ console.log(
 );
 
 //////////////////////////////////////////////////
-//||Tests
 
-//wifi geolocation
-import fetch from "node-fetch";
-import wifiscanner from "node-wifiscanner";
-
-// TODO: RETURN STREET ADDRESS ////////////////////////////////////////////////
+//||WiFi geolocation
 
 //find MAC addresses of nearby WiFi access points
 const getMACAddress = () => {
@@ -96,9 +93,6 @@ const getCoords = (macAddress) => {
   });
 };
 
-let myMACs = await getMACAddress();
-let myCoords = await getCoords(myMACs);
-
 //reverse geocoding - lookup address given lat/lng
 const getAddress = (coords) => {
   return new Promise((resolve, reject) => {
@@ -122,8 +116,51 @@ const getAddress = (coords) => {
       });
   });
 };
-let add = await getAddress(myCoords);
-await console.log(add.results[0].formatted_address);
+
+//////////////////////////
+const tasks = new listr([
+  {
+    title: "One",
+    task: () => {
+      // let myMACs = await getMACAddress();
+      Promise.resolve;
+    },
+  },
+  {
+    title: "Two",
+    task: () => {
+      let myCoords = await getCoords(myMACs);
+    },
+  },
+  {
+    title: "Three",
+    task: () => {
+      let myAdd = await getAddress(myCoords);
+    },
+  },
+  {
+    title: "Four",
+    task: () => {
+      myAdd = myAdd.results[0].formatted_address;
+    },
+  },
+  {
+    title: "Five",
+    task: () => {
+      console.log(myAdd);
+    },
+  },
+]);
+
+tasks.run().catch((err) => {
+  console.error(err);
+});
+// let myMACs = await getMACAddress();
+// let myCoords = await getCoords(myMACs);
+// let myAdd = await getAddress(myCoords);
+// myAdd = myAdd.results[0].formatted_address;
+// console.log(myAdd);
+/////////////////////////////////////////////
 
 //sample animation
 // function twirlTimer() {
@@ -138,3 +175,28 @@ await console.log(add.results[0].formatted_address);
 
 // cli(chalk.yellow(process.argv[2]));
 // if (options.peppers) console.log("peppers");
+
+//||TODO
+
+/**
+
+    spinner while waiting for Promises to resolve
+
+    ask user to manually enter their address if geoloc fails or is 
+    wrong, and check for errors
+
+seeder to populate DB with restaurants/ use Yelp or other API 
+
+SQL query for 5 closest restaurants 
+
+Print restaurant names to terminal, user has option to select one or esc
+
+Google Maps walking directions listed for restaurants if close (30min walking?)
+   if no restaurants in walking distance, print err 
+   or if <5 are within walking distance
+
+   list restaurants, give directions to restaurant 
+quickbite
+   [1,2,3,4,5, esc]
+quickbite 1 (2 | 3 | 4 | 5)
+ */
