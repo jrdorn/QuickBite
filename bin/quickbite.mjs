@@ -23,14 +23,14 @@ program.parse();
 
 const options = program.opts();
 console.log(
-  chalk.yellow(`\n
- --------------------------------------------------------------
-|  _____           _           _      _____    _    _           |
-| |     |   _ _   |_|   ___   | |_   | __  |  |_|  | |_    ___  |
-| |  |  |  | | |  | |  |  _|  | '_|  | __ -|  | |  |  _|  | -_| |
-| |__  _|  |___|  |_|  |___|  |_,_|  |_____|  |_|  |_|    |___| |
-|    |__|                                                       |                    
- --------------------------------------------------------------
+  chalk.green(`\n
+           --------------------------------------------------------------                 
+          |  _____           _           _      _____    _    _           |               
+          | |     |   _ _   |_|   ___   | |_   | __  |  |_|  | |_    ___  |               
+          | |  |  |  | | |  | |  |  _|  | '_|  | __ -|  | |  |  _|  | -_| |               
+          | |__  _|  |___|  |_|  |___|  |_,_|  |_____|  |_|  |_|    |___| |               
+          |    |__|                                                       |               
+           --------------------------------------------------------------                 
 
 
 \n`)
@@ -118,60 +118,45 @@ const getAddress = (coords) => {
 };
 
 //////////////////////////
+let myMACs;
+let myCoords;
+let myAdd;
+
 const tasks = new listr([
   {
-    title: "One",
-    task: () => {
-      // let myMACs = await getMACAddress();
-      Promise.resolve;
+    title: chalk.yellowBright.bold("Get MAC addresses"),
+    task: async () => {
+      myMACs = await getMACAddress();
     },
   },
   {
-    title: "Two",
-    task: () => {
-      let myCoords = await getCoords(myMACs);
+    title: chalk.greenBright.bold("Get geocoordinates from MACs"),
+    task: async () => {
+      myCoords = await getCoords(myMACs);
     },
   },
   {
-    title: "Three",
-    task: () => {
-      let myAdd = await getAddress(myCoords);
+    title: chalk.blueBright.bold("Get address from geocoordinates"),
+    task: async () => {
+      myAdd = await getAddress(myCoords);
     },
   },
   {
-    title: "Four",
+    title: chalk.magentaBright.bold("Format address"),
     task: () => {
       myAdd = myAdd.results[0].formatted_address;
     },
   },
-  {
-    title: "Five",
-    task: () => {
-      console.log(myAdd);
-    },
-  },
 ]);
 
-tasks.run().catch((err) => {
-  console.error(err);
-});
-// let myMACs = await getMACAddress();
-// let myCoords = await getCoords(myMACs);
-// let myAdd = await getAddress(myCoords);
-// myAdd = myAdd.results[0].formatted_address;
-// console.log(myAdd);
-/////////////////////////////////////////////
+tasks
+  .run()
+  .catch((err) => {
+    console.log(`Error: ${err}`);
+  })
+  .then(await console.log(myAdd));
 
-//sample animation
-// function twirlTimer() {
-//   const P = ["\\", "|", "/", "-"];
-//   let x = 0;
-//   return setInterval(function () {
-//     process.stdout.write("\r" + P[x++]);
-//     x &= 3;
-//   }, 250);
-// }
-//////////////////////////////////////////////////
+/////////////////////////////////////////////
 
 // cli(chalk.yellow(process.argv[2]));
 // if (options.peppers) console.log("peppers");
@@ -180,7 +165,6 @@ tasks.run().catch((err) => {
 
 /**
 
-    spinner while waiting for Promises to resolve
 
     ask user to manually enter their address if geoloc fails or is 
     wrong, and check for errors
