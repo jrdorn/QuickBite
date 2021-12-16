@@ -89,6 +89,10 @@ const getCoords = (macAddress) => {
         } else {
           resolve(json.location);
         }
+      })
+      // .catch((err) => console.log(chalk.red(`Error: ${err.message}\n`)));
+      .catch((err) => {
+        return Promise.reject(err);
       });
   });
 };
@@ -109,11 +113,12 @@ const getAddress = (coords) => {
       .then((res) => res.json())
       .then((json, err) => {
         if (err) {
-          reject(console.log(`Error: ${err}`));
+          console.log(`Error: ${err}`);
         } else {
           resolve(json);
         }
-      });
+      })
+      .catch((err) => console.log(chalk.red(`Error: ${err.message}\n`)));
   });
 };
 
@@ -142,19 +147,24 @@ const tasks = new listr([
     },
   },
   {
-    title: chalk.magentaBright.bold("Format address"),
+    title: chalk.magentaBright.bold(`Format address`),
     task: () => {
       myAdd = myAdd.results[0].formatted_address;
     },
   },
 ]);
 
-tasks
-  .run()
-  .catch((err) => {
+(async () => {
+  await tasks.run().catch((err) => {
     console.log(`Error: ${err}`);
-  })
-  .then(await console.log(myAdd));
+  });
+  console.log(`\nYour address is: ${myAdd}\n`);
+})();
+
+//////////////////////////////////
+
+// let temp = { lat: 21, lng: 21 };
+// await getAddress(temp);
 
 /////////////////////////////////////////////
 
@@ -165,6 +175,8 @@ tasks
 
 /**
 
+
+error handling
 
     ask user to manually enter their address if geoloc fails or is 
     wrong, and check for errors

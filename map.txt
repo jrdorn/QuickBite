@@ -115,3 +115,7 @@ https://www.npmjs.com/package/uber-cli
 
 
 Reverse geocoding (address lookup)
+
+Err handling for getAddress, node-fetch, try catch vs Promise.catch
+  solved: another catch directly following 'then' calls after calling fetch
+
