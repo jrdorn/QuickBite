@@ -5,9 +5,10 @@ import { cli } from "../src/index.mjs";
 import { Command } from "commander/esm.mjs";
 import dotenv from "dotenv"; //store API keys in the environment
 import fetch from "node-fetch";
+import inquirer from "inquirer";
 import listr from "listr";
-import process from "process";
-import readline from "readline";
+// import process from "process";
+// import readline from "readline";
 import wifiscanner from "node-wifiscanner";
 
 //
@@ -166,44 +167,36 @@ const tasks = new listr([
 ]);
 
 (async () => {
-  await tasks.run().catch((err) => {
-    console.log(`Error: ${err}`);
-  });
-
-  rl.question(
-    //
-    chalk.green(`\nYour address is: ${myAdd}\n\nIs that correct? (y/n) `),
-    (userInput) => {
-      let answer = userInput[0].toLowerCase();
-      //if user says the given address is incorrect, prompt to update address and validate response
-      if (answer === "n") {
-        // // console.log("yes");
-        //pass if user verifies the given address is true
-      } else if (answer === "y") {
-        // // console.log("no");
-        //if invalid input, reprompt user
-      } else {
-        // // console.log(`you said ${answer}`);
-
-        let recursiveRead = () => {
-          console.log("here");
-          rl.question("Enter q to quit: ", (a) => {
-            recursiveRead();
-          });
-        };
-        recursiveRead();
-      }
-      ////////
-      rl.close();
-    }
-  );
+  // await tasks.run().catch((err) => {
+  //   console.log(`Error: ${err}`);
+  // });
 
   //
-  rl.on("close", () => {
-    console.log("Goodbye.");
-    process.exit(0);
-  });
-})();
+  // let recursiveRead = (myAdd) => {
+  //   rl.question(
+  //     chalk.green(`\nYour address is: ${myAdd}\n\nIs that correct? (y/n) `),
+  //     (a) => {
+  //       let answer = a[0].toLowerCase();
+  //       //base case, for recursion: close readline and return
+  //       if (answer === "y") {
+  //         return rl.close();
+  //         //prompt for address if user selects "no"
+  //       } else if (answer === "n") {
+  //         console.log("prompt for address");
+  //       } else {
+  //         //Recurse
+  //         recursiveRead(a);
+  //       }
+  //     }
+  //   );
+  // };
+  //
+//   recursiveRead(myAdd);
+//   rl.on("close", () => {
+//     console.log("Goodbye.\n");
+//     process.exit(0);
+//   });
+// })();
 
 //||TODO
 

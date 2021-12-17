@@ -118,4 +118,12 @@ Reverse geocoding (address lookup)
 
 Err handling for getAddress, node-fetch, try catch vs Promise.catch
   solved: another catch directly following 'then' calls after calling fetch
+ 
 
+                                                                                            yes: rl.close()
+                                                                                          /
+                    yes: rl.close()           valid address: format and ask user to confirm -- no: go back and reprompt for address
+                  /                         /
+  Address detected -- no: prompt for address -- invalid address: reprompt for address
+                  \
+                   invalid input: reprompt for y/n
