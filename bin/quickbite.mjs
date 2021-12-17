@@ -179,73 +179,66 @@ dns.resolve("a16z.com", (err) => {
     console.error(chalk.red(`Error: you must be online to use QuickBite\n`));
   } else {
     (async () => {
-      await tasks.run().catch((err) => {
-        console.error(`Error: ${err}`);
-      });
-
-      // inquirer
-      //   .prompt([
-      //     {
-      //       type: "list",
-      //       name: "initAddr",
-      //       message: chalk.green(
-      //         `Your address is: ${myAdd}\n\n\nIs that correct? (y/n)\n`
-      //       ),
-      //       choices: ["Yes", "No"],
-      //     },
-      //   ])
-      //   .then((answers) => {
-      //     if (answers.initAddr === "Yes") {
-      //       console.log("you said yes");
-      //     }
-      //     if (answers.initAddr === "No") {
-      //       inquirer
-      //         .prompt([
-      //           {
-      //             type: "input",
-      //             name: "repromptAddr",
-      //             message:
-      //               "Please enter a valid US address in the following format:\n(875 N Michigan Ave, Chicago, IL 60611)\n\n",
-      //             choices: ["000000", "111111111"],
-      //           },
-      //           // filter validate transformer
-      //         ])
-      //         .then((answer) => {
-      //           console.log(
-      //             `You entered ${answer.repromptAddr}, is that correct? `
-      //           );
-      //         });
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.error(`Error: ${err}`);
-      //   });
+      //
+      // await tasks.run().catch((err) => {
+      //   console.error(`Error: ${err}`);
+      // });
+      //
 
       //
-      // let recursiveRead = (myAdd) => {
-      //   rl.question(
-      //     chalk.green(`\nYour address is: ${myAdd}\n\nIs that correct? (y/n) `),
-      //     (a) => {
-      //       let answer = a[0].toLowerCase();
-      //       //base case, for recursion: close readline and return
-      //       if (answer === "y") {
-      //         return rl.close();
-      //         //prompt for address if user selects "no"
-      //       } else if (answer === "n") {
-      //         console.log("prompt for address");
-      //       } else {
-      //         //Recurse
-      //         recursiveRead(a);
-      //       }
-      //     }
-      //   );
-      // };
-      //
-      //   recursiveRead(myAdd);
-      //   rl.on("close", () => {
-      //     console.log("Goodbye.\n");
-      //     process.exit(0);
-      //   });
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "initAddr",
+            message: chalk.green(
+              `Your address is: ${myAdd}\n\n\nIs that correct? (y/n)\n`
+            ),
+            choices: ["Yes", "No"],
+          },
+        ])
+        .then((answers) => {
+          if (answers.initAddr === "Yes") {
+            console.log("you said yes");
+          }
+          if (answers.initAddr === "No") {
+            ////////////////////////////////////////////////////////////////////////////////////////
+            inquirer
+              .prompt([
+                {
+                  type: "input",
+                  name: "promptAddr",
+                  message:
+                    "Please enter a valid US address in the following format:\n(street, city, state)\n\n",
+                },
+                // filter validate transformer
+              ])
+              .then((answer) => {
+                //
+                inquirer
+                  .prompt([
+                    {
+                      type: "list",
+                      name: "repromptAddr",
+                      message: `You entered: ${answer.promptAddr}\nIs that your address? `,
+                      choices: ["Yes", "No"],
+                    },
+                  ])
+                  .then((rpAnswer) => {
+                    if (rpAnswer.repromptAddr === "Yes") {
+                      // console.log(`${answer.promptAddr}`);
+                      await fetch(
+                        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${answer.promptAddr}&inputtype=textquery&fields=formatted_address&key=${config.parsed.MAPS_KEY}`
+                      );
+                    }
+                  });
+              });
+            ////////////////////////////////////////////////////////////////////////////////////////
+          }
+        })
+        .catch((err) => {
+          console.error(`Error: ${err}`);
+        });
     })();
   }
 });
@@ -255,11 +248,10 @@ dns.resolve("a16z.com", (err) => {
 /**
 
 
-    ask user to manually enter their address if geoloc fails or is 
-    wrong, and check for errors
+ask user to manually enter their address if geoloc fails or is wrong
 
 
-error handling
+error handling (user loses connectivity?)
 
 
 

@@ -128,3 +128,6 @@ Err handling for getAddress, node-fetch, try catch vs Promise.catch
                   
 
 street address validation: gotchas 
+
+
+Give Google Maps credit in README
