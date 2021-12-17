@@ -7,8 +7,10 @@ import dotenv from "dotenv"; //store API keys in the environment
 import fetch from "node-fetch";
 import inquirer from "inquirer";
 import listr from "listr";
+//
 // import process from "process";
 // import readline from "readline";
+//
 import wifiscanner from "node-wifiscanner";
 
 //
@@ -42,11 +44,13 @@ console.log(
 \n`)
 );
 
+//
 //readline
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+// });
+//
 
 //////////////////////////////////////////////////
 
@@ -57,7 +61,7 @@ const getMACAddress = () => {
   return new Promise((resolve, reject) => {
     wifiscanner.scan((err, data) => {
       if (err) {
-        reject(console.log(`Error: ${err}`));
+        reject(console.error(`Error: ${err}`));
       } else {
         //format MAC addresses for Google Geolocation API
         let macs = data.map((a) => {
@@ -97,7 +101,7 @@ const getCoords = (macAddress) => {
       .then((res) => res.json())
       .then((json, err) => {
         if (err) {
-          reject(console.log(`Error: ${err}`));
+          reject(console.error(`Error: ${err}`));
         } else {
           resolve(json.location);
         }
@@ -125,12 +129,12 @@ const getAddress = (coords) => {
       .then((res) => res.json())
       .then((json, err) => {
         if (err) {
-          console.log(`Error: ${err}`);
+          console.error(`Error: ${err}`);
         } else {
           resolve(json);
         }
       })
-      .catch((err) => console.log(chalk.red(`Error: ${err.message}\n`)));
+      .catch((err) => console.error(`Error: ${err.message}\n`));
   });
 };
 
@@ -166,10 +170,49 @@ const tasks = new listr([
   },
 ]);
 
+//|| Main
 (async () => {
-  // await tasks.run().catch((err) => {
-  //   console.log(`Error: ${err}`);
-  // });
+  await tasks.run().catch((err) => {
+    console.error(`Error: ${err}`);
+  });
+
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "initAddr",
+        message: chalk.green(
+          `Your address is: ${myAdd}\n\n\nIs that correct? (y/n)\n`
+        ),
+        choices: ["Yes", "No"],
+      },
+    ])
+    .then((answers) => {
+      if (answers.initAddr === "Yes") {
+        console.log("you said yes");
+      }
+      if (answers.initAddr === "No") {
+        inquirer
+          .prompt([
+            {
+              type: "input",
+              name: "repromptAddr",
+              message:
+                "Please enter a valid US address in the following format:\n(875 N Michigan Ave, Chicago, IL 60611)\n\n",
+              choices: ["000000", "111111111"],
+            },
+            // filter validate transformer
+          ])
+          .then((answer) => {
+            console.log(
+              `You entered ${answer.repromptAddr}, is that correct? `
+            );
+          });
+      }
+    })
+    .catch((err) => {
+      console.error(`Error: ${err}`);
+    });
 
   //
   // let recursiveRead = (myAdd) => {
@@ -191,19 +234,21 @@ const tasks = new listr([
   //   );
   // };
   //
-//   recursiveRead(myAdd);
-//   rl.on("close", () => {
-//     console.log("Goodbye.\n");
-//     process.exit(0);
-//   });
-// })();
+  //   recursiveRead(myAdd);
+  //   rl.on("close", () => {
+  //     console.log("Goodbye.\n");
+  //     process.exit(0);
+  //   });
+})();
 
 //||TODO
 
 /**
 
+
     ask user to manually enter their address if geoloc fails or is 
     wrong, and check for errors
+
 
 error handling
 
@@ -223,4 +268,8 @@ Google Maps walking directions listed for restaurants if close (30min walking?)
 quickbite
    [1,2,3,4,5, esc]
 quickbite 1 (2 | 3 | 4 | 5)
+
+
+write error test cases
+
  */

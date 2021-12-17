@@ -124,6 +124,7 @@ Err handling for getAddress, node-fetch, try catch vs Promise.catch
                                                                                           /
                     yes: rl.close()           valid address: format and ask user to confirm -- no: go back and reprompt for address
                   /                         /
-  Address detected -- no: prompt for address -- invalid address: reprompt for address
-                  \
-                   invalid input: reprompt for y/n
+  Address detected -- no: prompt for address 
+                  
+
+street address validation: gotchas 
