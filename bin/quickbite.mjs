@@ -3,6 +3,7 @@
 import chalk from "chalk";
 import { cli } from "../src/index.mjs";
 import { Command } from "commander/esm.mjs";
+import dns from "dns";
 import dotenv from "dotenv"; //store API keys in the environment
 import fetch from "node-fetch";
 import inquirer from "inquirer";
@@ -171,75 +172,83 @@ const tasks = new listr([
 ]);
 
 //|| Main
-(async () => {
-  await tasks.run().catch((err) => {
-    console.error(`Error: ${err}`);
-  });
 
-  inquirer
-    .prompt([
-      {
-        type: "list",
-        name: "initAddr",
-        message: chalk.green(
-          `Your address is: ${myAdd}\n\n\nIs that correct? (y/n)\n`
-        ),
-        choices: ["Yes", "No"],
-      },
-    ])
-    .then((answers) => {
-      if (answers.initAddr === "Yes") {
-        console.log("you said yes");
-      }
-      if (answers.initAddr === "No") {
-        inquirer
-          .prompt([
-            {
-              type: "input",
-              name: "repromptAddr",
-              message:
-                "Please enter a valid US address in the following format:\n(875 N Michigan Ave, Chicago, IL 60611)\n\n",
-              choices: ["000000", "111111111"],
-            },
-            // filter validate transformer
-          ])
-          .then((answer) => {
-            console.log(
-              `You entered ${answer.repromptAddr}, is that correct? `
-            );
-          });
-      }
-    })
-    .catch((err) => {
-      console.error(`Error: ${err}`);
-    });
+//Abort if user is offline
+dns.resolve("a16z.com", (err) => {
+  if (err) {
+    console.error(chalk.red(`Error: you must be online to use QuickBite\n`));
+  } else {
+    (async () => {
+      await tasks.run().catch((err) => {
+        console.error(`Error: ${err}`);
+      });
 
-  //
-  // let recursiveRead = (myAdd) => {
-  //   rl.question(
-  //     chalk.green(`\nYour address is: ${myAdd}\n\nIs that correct? (y/n) `),
-  //     (a) => {
-  //       let answer = a[0].toLowerCase();
-  //       //base case, for recursion: close readline and return
-  //       if (answer === "y") {
-  //         return rl.close();
-  //         //prompt for address if user selects "no"
-  //       } else if (answer === "n") {
-  //         console.log("prompt for address");
-  //       } else {
-  //         //Recurse
-  //         recursiveRead(a);
-  //       }
-  //     }
-  //   );
-  // };
-  //
-  //   recursiveRead(myAdd);
-  //   rl.on("close", () => {
-  //     console.log("Goodbye.\n");
-  //     process.exit(0);
-  //   });
-})();
+      // inquirer
+      //   .prompt([
+      //     {
+      //       type: "list",
+      //       name: "initAddr",
+      //       message: chalk.green(
+      //         `Your address is: ${myAdd}\n\n\nIs that correct? (y/n)\n`
+      //       ),
+      //       choices: ["Yes", "No"],
+      //     },
+      //   ])
+      //   .then((answers) => {
+      //     if (answers.initAddr === "Yes") {
+      //       console.log("you said yes");
+      //     }
+      //     if (answers.initAddr === "No") {
+      //       inquirer
+      //         .prompt([
+      //           {
+      //             type: "input",
+      //             name: "repromptAddr",
+      //             message:
+      //               "Please enter a valid US address in the following format:\n(875 N Michigan Ave, Chicago, IL 60611)\n\n",
+      //             choices: ["000000", "111111111"],
+      //           },
+      //           // filter validate transformer
+      //         ])
+      //         .then((answer) => {
+      //           console.log(
+      //             `You entered ${answer.repromptAddr}, is that correct? `
+      //           );
+      //         });
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.error(`Error: ${err}`);
+      //   });
+
+      //
+      // let recursiveRead = (myAdd) => {
+      //   rl.question(
+      //     chalk.green(`\nYour address is: ${myAdd}\n\nIs that correct? (y/n) `),
+      //     (a) => {
+      //       let answer = a[0].toLowerCase();
+      //       //base case, for recursion: close readline and return
+      //       if (answer === "y") {
+      //         return rl.close();
+      //         //prompt for address if user selects "no"
+      //       } else if (answer === "n") {
+      //         console.log("prompt for address");
+      //       } else {
+      //         //Recurse
+      //         recursiveRead(a);
+      //       }
+      //     }
+      //   );
+      // };
+      //
+      //   recursiveRead(myAdd);
+      //   rl.on("close", () => {
+      //     console.log("Goodbye.\n");
+      //     process.exit(0);
+      //   });
+    })();
+  }
+});
 
 //||TODO
 
@@ -269,6 +278,8 @@ quickbite
    [1,2,3,4,5, esc]
 quickbite 1 (2 | 3 | 4 | 5)
 
+
+polish comments
 
 write error test cases
 
