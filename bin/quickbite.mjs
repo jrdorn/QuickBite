@@ -6,13 +6,17 @@ import { Command } from "commander/esm.mjs";
 import dotenv from "dotenv"; //store API keys in the environment
 import fetch from "node-fetch";
 import listr from "listr";
+import process from "process";
+import readline from "readline";
 import wifiscanner from "node-wifiscanner";
 
+//
 const config = dotenv.config();
 if (config.error) {
   throw config.error;
 }
 
+//
 const program = new Command();
 
 program
@@ -21,6 +25,7 @@ program
 
 program.parse();
 
+//
 const options = program.opts();
 console.log(
   chalk.green(`\n
@@ -35,6 +40,12 @@ console.log(
 
 \n`)
 );
+
+//readline
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
 //////////////////////////////////////////////////
 
@@ -158,28 +169,52 @@ const tasks = new listr([
   await tasks.run().catch((err) => {
     console.log(`Error: ${err}`);
   });
-  console.log(`\nYour address is: ${myAdd}\n`);
+
+  rl.question(
+    //
+    chalk.green(`\nYour address is: ${myAdd}\n\nIs that correct? (y/n) `),
+    (userInput) => {
+      let answer = userInput[0].toLowerCase();
+      //if user says the given address is incorrect, prompt to update address and validate response
+      if (answer === "n") {
+        // // console.log("yes");
+        //pass if user verifies the given address is true
+      } else if (answer === "y") {
+        // // console.log("no");
+        //if invalid input, reprompt user
+      } else {
+        // // console.log(`you said ${answer}`);
+
+        let recursiveRead = () => {
+          console.log("here");
+          rl.question("Enter q to quit: ", (a) => {
+            recursiveRead();
+          });
+        };
+        recursiveRead();
+      }
+      ////////
+      rl.close();
+    }
+  );
+
+  //
+  rl.on("close", () => {
+    console.log("Goodbye.");
+    process.exit(0);
+  });
 })();
-
-//////////////////////////////////
-
-// let temp = { lat: 21, lng: 21 };
-// await getAddress(temp);
-
-/////////////////////////////////////////////
-
-// cli(chalk.yellow(process.argv[2]));
-// if (options.peppers) console.log("peppers");
 
 //||TODO
 
 /**
 
+    ask user to manually enter their address if geoloc fails or is 
+    wrong, and check for errors
 
 error handling
 
-    ask user to manually enter their address if geoloc fails or is 
-    wrong, and check for errors
+
 
 seeder to populate DB with restaurants/ use Yelp or other API 
 
