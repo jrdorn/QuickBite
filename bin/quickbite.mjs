@@ -8,10 +8,6 @@ import dotenv from "dotenv"; //store API keys in the environment
 import fetch from "node-fetch";
 import inquirer from "inquirer";
 import listr from "listr";
-//
-// import process from "process";
-// import readline from "readline";
-//
 import wifiscanner from "node-wifiscanner";
 
 //
@@ -44,14 +40,6 @@ console.log(
 
 \n`)
 );
-
-//
-//readline
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout,
-// });
-//
 
 //////////////////////////////////////////////////
 
@@ -202,6 +190,7 @@ dns.resolve("a16z.com", (err) => {
             console.log("you said yes");
           }
           if (answers.initAddr === "No") {
+            console.log("\n");
             ////////////////////////////////////////////////////////////////////////////////////////
             inquirer
               .prompt([
@@ -209,27 +198,58 @@ dns.resolve("a16z.com", (err) => {
                   type: "input",
                   name: "promptAddr",
                   message:
-                    "Please enter a valid US address in the following format:\n(street, city, state)\n\n",
+                    "Please enter a valid US address in the following format:\n\n(street, city, state)\n\n",
                 },
-                // filter validate transformer
               ])
               .then((answer) => {
-                //
+                console.log("\n");
+                //confirm if user wants to proceed with the entered address, or if they want to go back and change it
                 inquirer
                   .prompt([
                     {
                       type: "list",
                       name: "repromptAddr",
-                      message: `You entered: ${answer.promptAddr}\nIs that your address? `,
+                      message: `You entered: ${answer.promptAddr}\n\nIs that your address?\n`,
                       choices: ["Yes", "No"],
                     },
                   ])
                   .then((rpAnswer) => {
+                    //validate user address
                     if (rpAnswer.repromptAddr === "Yes") {
-                      // console.log(`${answer.promptAddr}`);
-                      await fetch(
-                        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${answer.promptAddr}&inputtype=textquery&fields=formatted_address&key=${config.parsed.MAPS_KEY}`
-                      );
+                      fetch(
+                        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${answer.promptAddr}&inputtype=textquery&fields=formatted_address&key=${config.parsed.MAPS_KEY}`,
+                        {
+                          method: "post",
+                          headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                          },
+                        }
+                      )
+                        .then((res) => res.json())
+                        .then((json, err) => {
+                          if (err) {
+                            //log any errors
+                            // reject(console.error(`Error: ${err}`));
+                            console.error(chalk.red(`Error: ${err}`));
+                          } else {
+                            //return if address not accepted by Google Maps API, otherwise continue
+                            // resolve(console.log(json));
+                            if (json.status === "OK") {
+                              console.log(json.candidates[0].formatted_address);
+                              // i = true;
+                              //
+                              //
+                            } else {
+                              console.error(
+                                chalk.red(`\nError: ${json.status}\n`)
+                              );
+                            }
+                          }
+                        })
+                        .catch((err) =>
+                          console.log(chalk.red(`Error: ${err.message}\n`))
+                        );
                     }
                   });
               });
@@ -250,7 +270,6 @@ dns.resolve("a16z.com", (err) => {
 
 ask user to manually enter their address if geoloc fails or is wrong
 
-
 error handling (user loses connectivity?)
 
 
@@ -269,6 +288,10 @@ Google Maps walking directions listed for restaurants if close (30min walking?)
 quickbite
    [1,2,3,4,5, esc]
 quickbite 1 (2 | 3 | 4 | 5)
+
+
+manual, tell users to press ctrl-c to quit? or 
+detect OS/ hotkey binding and display that
 
 
 polish comments
