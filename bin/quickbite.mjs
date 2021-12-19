@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
 import chalk from "chalk";
+//
 import { cli } from "../src/index.mjs";
+//
 import { Command } from "commander/esm.mjs";
+//
 import dns from "dns";
 import dotenv from "dotenv"; //store API keys in the environment
 import fetch from "node-fetch";
@@ -271,8 +274,8 @@ dns.resolve("a16z.com", (err) => {
 
 >ask user to manually enter their address if geoloc fails or is wrong
 
-clear screen after each prompt
-Start Screen: display ascii, press space to continue, press (...) any time to quit
+
+Start Screen: display ascii, press space to continue, press (...) any time to quit, and clear screen after each prompt
 
 error handling (user loses connectivity?)
 

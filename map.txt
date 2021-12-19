@@ -138,4 +138,12 @@ Problem: need inquirer to reprompt if user enters invalid input
         trying wrapping switch-case with async function, each promise block as own function, putting in own module for readability
           keeping track of state- how deep in inquirer we are, user input address, y/n confirmation, final return value of valid address
       
+        not working- trying other solution from stackoverflow, create inquirer submenus as own module, main as own module, call in each other instead of using switch-case
+        (prompts as separate functions that call each other, instead of while or for loops or switch-case)
+
+        ERROR: OUTPUT IS SAME FORMATTED ADDRESS, REGARDLESS OF INPUT
+          solution: passing value of wrong function (yes confirmation instead of address to be validated)
+
+
+
   
