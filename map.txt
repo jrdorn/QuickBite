@@ -133,12 +133,13 @@ street address validation: gotchas
 Give Google Maps credit in README
 
 Problem: need inquirer to reprompt if user enters invalid input
-        sync for loop, async inquirer 
+        synchronous for loop, async await inquirer not working- the sync loop just blows through
         getting promise/callback to work inside switch case, with a loop (continuously prompt user until valid address submitted)
         trying wrapping switch-case with async function, each promise block as own function, putting in own module for readability
           keeping track of state- how deep in inquirer we are, user input address, y/n confirmation, final return value of valid address
       
-        not working- trying other solution from stackoverflow, create inquirer submenus as own module, main as own module, call in each other instead of using switch-case
+        !! not working- trying other solution from stackoverflow, create inquirer submenus as own module, main as own module, call in each other instead of using switch-case
+           any of the inquirer modules can be called from anywhere
         (prompts as separate functions that call each other, instead of while or for loops or switch-case)
 
         ERROR: OUTPUT IS SAME FORMATTED ADDRESS, REGARDLESS OF INPUT

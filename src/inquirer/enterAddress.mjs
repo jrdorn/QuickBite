@@ -1,7 +1,7 @@
 import { confirmAddress } from "./confirmAddress.mjs";
 import inquirer from "inquirer";
 
-//
+//prompt user to enter their address
 export let enterAddress = () => {
   inquirer
     .prompt([
