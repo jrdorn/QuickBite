@@ -27,7 +27,7 @@ let q1 = (state) => {
     ])
     .then((answer) => {
       state.addr = answer.promptAddr;
-      state.level = 1;
+      state.level = "1";
       return state;
     });
 };
@@ -70,7 +70,7 @@ let q3 = (state) => {
         if (err) {
           //log any errors
           console.error(chalk.red(`Error: ${err}`));
-          state.level = 0; //restart q
+          state.level = "0"; //restart q
         } else {
           //return if address not accepted by Google Maps API, otherwise continue
           if (json.status === "OK") {
@@ -79,7 +79,7 @@ let q3 = (state) => {
             //
           } else {
             console.error(chalk.red(`\nError: ${json.status}\n`));
-            state.level = 0; //restart q
+            state.level = "0"; //restart q
           }
         }
       });
@@ -104,19 +104,44 @@ let q3 = (state) => {
 
 //
 
-let level = 0;
+// while (level !== "2") {
+//   (async () => {
+//     switch (level) {
+//       case level == "0":
+//         state = await q1(state);
+//         level = state.level;
+//         break;
+//       case (level = "1"):
+//         state = await q2(state);
+//         state = await q3(state);
+//         level = state.level;
+//     }
+//   })();
+// }
 
-while (level !== "2") {
-  (async () => {
+let level = "0";
+
+//////////
+let loopAddress = async () => {
+  // console.log("a");
+  const promises = await (async () => {
+    // console.log("b");
     switch (level) {
-      case level == "0":
+      case level === "0":
+        // console.log("c");
         state = await q1(state);
         level = state.level;
         break;
-      case (level = "1"):
+      case level == "1":
+        // console.log("d");
         state = await q2(state);
         state = await q3(state);
         level = state.level;
     }
   })();
-}
+  // console.log("e");
+  const data = promises;
+  return data;
+};
+
+loopAddress();

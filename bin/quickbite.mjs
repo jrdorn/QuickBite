@@ -168,12 +168,13 @@ dns.resolve("a16z.com", (err) => {
   } else {
     (async () => {
       //
-      // await tasks.run().catch((err) => {
-      //   console.error(`Error: ${err}`);
-      // });
+      await tasks.run().catch((err) => {
+        console.error(`Error: ${err}`);
+      });
       //
 
       //
+      console.log("\n");
       inquirer
         .prompt([
           {
@@ -186,6 +187,7 @@ dns.resolve("a16z.com", (err) => {
           },
         ])
         .then((answers) => {
+          console.clear();
           if (answers.initAddr === "Yes") {
             console.log("you said yes");
           }
@@ -267,8 +269,10 @@ dns.resolve("a16z.com", (err) => {
 
 /**
 
+>ask user to manually enter their address if geoloc fails or is wrong
 
-ask user to manually enter their address if geoloc fails or is wrong
+clear screen after each prompt
+Start Screen: display ascii, press space to continue, press (...) any time to quit
 
 error handling (user loses connectivity?)
 
