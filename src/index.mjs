@@ -1,3 +1,3 @@
-export function cli(args) {
+export let cli = (args) => {
   console.log(args);
-}
+};

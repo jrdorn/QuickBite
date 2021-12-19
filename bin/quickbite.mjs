@@ -3,6 +3,9 @@
 import chalk from "chalk";
 //
 import { cli } from "../src/index.mjs";
+import { enterAddress } from "../src/enterAddress.mjs";
+import { confirmAddress } from "../src/confirmAddress.mjs";
+import { validateAddress } from "../src/validateAddress.mjs";
 //
 import { Command } from "commander/esm.mjs";
 //
@@ -190,74 +193,78 @@ dns.resolve("a16z.com", (err) => {
           },
         ])
         .then((answers) => {
-          console.clear();
+          //
+          // console.clear();
+          //
           if (answers.initAddr === "Yes") {
             console.log("you said yes");
           }
           if (answers.initAddr === "No") {
             console.log("\n");
             ////////////////////////////////////////////////////////////////////////////////////////
-            inquirer
-              .prompt([
-                {
-                  type: "input",
-                  name: "promptAddr",
-                  message:
-                    "Please enter a valid US address in the following format:\n\n(street, city, state)\n\n",
-                },
-              ])
-              .then((answer) => {
-                console.log("\n");
-                //confirm if user wants to proceed with the entered address, or if they want to go back and change it
-                inquirer
-                  .prompt([
-                    {
-                      type: "list",
-                      name: "repromptAddr",
-                      message: `You entered: ${answer.promptAddr}\n\nIs that your address?\n`,
-                      choices: ["Yes", "No"],
-                    },
-                  ])
-                  .then((rpAnswer) => {
-                    //validate user address
-                    if (rpAnswer.repromptAddr === "Yes") {
-                      fetch(
-                        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${answer.promptAddr}&inputtype=textquery&fields=formatted_address&key=${config.parsed.MAPS_KEY}`,
-                        {
-                          method: "post",
-                          headers: {
-                            Accept: "application/json",
-                            "Content-Type": "application/json",
-                          },
-                        }
-                      )
-                        .then((res) => res.json())
-                        .then((json, err) => {
-                          if (err) {
-                            //log any errors
-                            // reject(console.error(`Error: ${err}`));
-                            console.error(chalk.red(`Error: ${err}`));
-                          } else {
-                            //return if address not accepted by Google Maps API, otherwise continue
-                            // resolve(console.log(json));
-                            if (json.status === "OK") {
-                              console.log(json.candidates[0].formatted_address);
-                              // i = true;
-                              //
-                              //
-                            } else {
-                              console.error(
-                                chalk.red(`\nError: ${json.status}\n`)
-                              );
-                            }
-                          }
-                        })
-                        .catch((err) =>
-                          console.log(chalk.red(`Error: ${err.message}\n`))
-                        );
-                    }
-                  });
-              });
+            enterAddress();
+
+            // inquirer
+            //   .prompt([
+            //     {
+            //       type: "input",
+            //       name: "promptAddr",
+            //       message:
+            //         "Please enter a valid US address in the following format:\n\n(street, city, state)\n\n",
+            //     },
+            //   ])
+            //   .then((answer) => {
+            //     console.log("\n");
+            //     //confirm if user wants to proceed with the entered address, or if they want to go back and change it
+            //     inquirer
+            //       .prompt([
+            //         {
+            //           type: "list",
+            //           name: "repromptAddr",
+            //           message: `You entered: ${answer.promptAddr}\n\nIs that your address?\n`,
+            //           choices: ["Yes", "No"],
+            //         },
+            //       ])
+            //       .then((rpAnswer) => {
+            //         //validate user address
+            //         if (rpAnswer.repromptAddr === "Yes") {
+            //           fetch(
+            //             `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${answer.promptAddr}&inputtype=textquery&fields=formatted_address&key=${config.parsed.MAPS_KEY}`,
+            //             {
+            //               method: "post",
+            //               headers: {
+            //                 Accept: "application/json",
+            //                 "Content-Type": "application/json",
+            //               },
+            //             }
+            //           )
+            //             .then((res) => res.json())
+            //             .then((json, err) => {
+            //               if (err) {
+            //                 //log any errors
+            //                 // reject(console.error(`Error: ${err}`));
+            //                 console.error(chalk.red(`Error: ${err}`));
+            //               } else {
+            //                 //return if address not accepted by Google Maps API, otherwise continue
+            //                 // resolve(console.log(json));
+            //                 if (json.status === "OK") {
+            //                   console.log(json.candidates[0].formatted_address);
+            //                   // i = true;
+            //                   //
+            //                   //
+            //                 } else {
+            //                   console.error(
+            //                     chalk.red(`\nError: ${json.status}\n`)
+            //                   );
+            //                 }
+            //               }
+            //             })
+            //             .catch((err) =>
+            //               console.log(chalk.red(`Error: ${err.message}\n`))
+            //             );
+            //         }
+            //       });
+            //   });
             ////////////////////////////////////////////////////////////////////////////////////////
           }
         })
