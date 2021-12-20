@@ -1,19 +1,13 @@
 import { enterAddress } from "./enterAddress.mjs";
+import { key } from "../key.mjs";
 import chalk from "chalk";
-import dotenv from "dotenv";
 import fetch from "node-fetch";
-
-//get Google Maps API Key from env
-const config = dotenv.config();
-if (config.error) {
-  throw config.error;
-}
 
 //
 export let validateAddress = (addr) => {
   //validate user address
   fetch(
-    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${addr}&inputtype=textquery&fields=formatted_address&key=${config.parsed.MAPS_KEY}`,
+    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${addr}&inputtype=textquery&fields=formatted_address&key=${key}`,
     {
       method: "post",
       headers: {

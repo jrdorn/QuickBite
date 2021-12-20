@@ -1,7 +1,8 @@
+import { key } from "../key.mjs";
 import fetch from "node-fetch";
 
 //find lat/lng of user
-export const getCoords = (macAddress, MAPS_KEY) => {
+export const getCoords = (macAddress) => {
   let body = {
     considerIp: "false",
     wifiAccessPoints: macAddress,
@@ -9,18 +10,15 @@ export const getCoords = (macAddress, MAPS_KEY) => {
 
   return new Promise((resolve, reject) => {
     //send POST request to API
-    fetch(
-      `https://www.googleapis.com/geolocation/v1/geolocate?key=${MAPS_KEY}`,
-      {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        //serialize body value
-        body: JSON.stringify(body),
-      }
-    )
+    fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${key}`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      //serialize body value
+      body: JSON.stringify(body),
+    })
       .then((res) => res.json())
       .then((json, err) => {
         if (err) {
