@@ -4,21 +4,23 @@ import chalk from "chalk";
 //
 import { cli } from "../src/index.mjs";
 //
+//Geolocation
+import { getMACAddress } from "../src/geolocation/getMACAddress.mjs";
+import { getCoords } from "../src/geolocation/getCoords.mjs";
+import { getAddress } from "../src/geolocation/getAddress.mjs";
+//
+//Inquirer
 import { enterAddress } from "../src/inquirer/enterAddress.mjs";
-import { confirmAddress } from "../src/inquirer/confirmAddress.mjs";
-import { validateAddress } from "../src/inquirer/validateAddress.mjs";
 //
 import { Command } from "commander/esm.mjs";
 //
 import dns from "dns";
 import dotenv from "dotenv"; //store API keys in the environment
-import fetch from "node-fetch";
 import inquirer from "inquirer";
+import keypress from "keypress";
 import listr from "listr";
+import process from "process";
 //
-// import process from "process";
-//
-import wifiscanner from "node-wifiscanner";
 
 //Get Google Maps API Key fron .env
 const config = dotenv.config();
@@ -49,7 +51,7 @@ let intro = chalk.green(`\n
 
                                   Press [ space ] to continue
 
-                              Press [ ctrl + c ] to quit anytime
+                               Press [ ctrl + c ] to quit anytime
 
 \n`);
 
@@ -58,7 +60,7 @@ let myMACs;
 let myCoords;
 let myAdd;
 
-const tasks = new listr([
+const geo = new listr([
   {
     title: chalk.yellowBright.bold("Get MAC addresses"),
     task: async () => {
@@ -68,13 +70,13 @@ const tasks = new listr([
   {
     title: chalk.greenBright.bold("Get geocoordinates from MACs"),
     task: async () => {
-      myCoords = await getCoords(myMACs);
+      myCoords = await getCoords(myMACs, config.parsed.MAPS_KEY);
     },
   },
   {
     title: chalk.blueBright.bold("Get address from geocoordinates"),
     task: async () => {
-      myAdd = await getAddress(myCoords);
+      myAdd = await getAddress(myCoords, config.parsed.MAPS_KEY);
     },
   },
   {
@@ -87,6 +89,18 @@ const tasks = new listr([
 
 //|| Main
 
+//
+keypress(process.stdin);
+
+//
+process.stdin.on("keypress", (ch, key) => {
+  if (key.name === "space") {
+    console.log(key.name);
+  }
+});
+
+// process.stdin.setRawMode(true);
+
 //Abort if user is offline
 dns.resolve("a16z.com", (err) => {
   if (err) {
@@ -95,9 +109,9 @@ dns.resolve("a16z.com", (err) => {
     console.log(intro);
     (async () => {
       //
-      await tasks.run().catch((err) => {
-        console.error(`Error: ${err}`);
-      });
+      // await geo.run().catch((err) => {
+      //   console.error(`Error: ${err}`);
+      // });
       //
 
       //
@@ -123,6 +137,7 @@ dns.resolve("a16z.com", (err) => {
           if (answers.initAddr === "No") {
             console.log("\n");
             ////////////////////////////////////////////////////////////////////////////////////////
+            //prompt for and validate user address
             enterAddress();
             ////////////////////////////////////////////////////////////////////////////////////////
           }
@@ -138,8 +153,8 @@ dns.resolve("a16z.com", (err) => {
 
 /**
  * 
- * 
-modularize geolocation
+ 
+ 
 >Start Screen: 
 press space to continue, 
 clear screen after each prompt
@@ -172,6 +187,8 @@ detect OS/ hotkey binding and display that
 
 
 polish comments
+
+write readme with screenshots
 
 write error test cases
 

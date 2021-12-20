@@ -1,5 +1,7 @@
+import fetch from "node-fetch";
+
 //find lat/lng of user
-const getCoords = (macAddress) => {
+export const getCoords = (macAddress, MAPS_KEY) => {
   let body = {
     considerIp: "false",
     wifiAccessPoints: macAddress,
@@ -8,7 +10,7 @@ const getCoords = (macAddress) => {
   return new Promise((resolve, reject) => {
     //send POST request to API
     fetch(
-      `https://www.googleapis.com/geolocation/v1/geolocate?key=${config.parsed.MAPS_KEY}`,
+      `https://www.googleapis.com/geolocation/v1/geolocate?key=${MAPS_KEY}`,
       {
         method: "post",
         headers: {

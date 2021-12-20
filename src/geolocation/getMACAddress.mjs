@@ -1,5 +1,7 @@
+import wifiscanner from "node-wifiscanner";
+
 //find MAC addresses of nearby WiFi access points
-const getMACAddress = () => {
+export const getMACAddress = () => {
   return new Promise((resolve, reject) => {
     wifiscanner.scan((err, data) => {
       if (err) {
