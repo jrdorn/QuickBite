@@ -156,4 +156,5 @@ problem: I want to display start img, wait for user to press space, then start p
 
       trying three solutions: readline module, custom keypress, keypress module 
       not waiting, not logging anything, continuing to log once program starts, program not waiting to start
+      Solved: use readline, close() inside Promise, export variable awaiting the resolved promise
       

@@ -12,6 +12,8 @@ export const geo = new listr([
   {
     title: chalk.yellowBright.bold("Get MAC addresses"),
     task: async () => {
+      console.clear();
+      console.log("\n");
       myMACs = await getMACAddress();
     },
   },

@@ -18,6 +18,9 @@ export let validateAddress = (addr) => {
   )
     .then((res) => res.json())
     .then((json, err) => {
+      //
+      console.clear();
+      //
       if (err) {
         //log any errors
         console.error(chalk.red(`Error: ${err}`));

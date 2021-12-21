@@ -4,7 +4,7 @@ import chalk from "chalk";
 import { intro } from "../src/intro.mjs";
 import { geo } from "../src/geolocation/geo.mjs";
 import { enterAddress } from "../src/inquirer/enterAddress.mjs";
-import { Command } from "commander/esm.mjs";
+// import { Command } from "commander/esm.mjs";
 import dns from "dns";
 import inquirer from "inquirer";
 
@@ -16,38 +16,6 @@ import inquirer from "inquirer";
 // program.parse();
 // const options = program.opts();
 //
-
-//////////////////////////
-// let myMACs;
-// let myCoords;
-// let myAdd;
-
-// const geo = new listr([
-//   {
-//     title: chalk.yellowBright.bold("Get MAC addresses"),
-//     task: async () => {
-//       myMACs = await getMACAddress();
-//     },
-//   },
-//   {
-//     title: chalk.greenBright.bold("Get geocoordinates from MACs"),
-//     task: async () => {
-//       myCoords = await getCoords(myMACs, config.parsed.MAPS_KEY);
-//     },
-//   },
-//   {
-//     title: chalk.blueBright.bold("Get address from geocoordinates"),
-//     task: async () => {
-//       myAdd = await getAddress(myCoords, config.parsed.MAPS_KEY);
-//     },
-//   },
-//   {
-//     title: chalk.magentaBright.bold(`Format address`),
-//     task: () => {
-//       myAdd = myAdd.results[0].formatted_address;
-//     },
-//   },
-// ]);
 
 //|| Main
 
@@ -65,13 +33,13 @@ dns.resolve("a16z.com", (err) => {
         })
         .then((ctx) => {
           myAdd = ctx.addr;
-          console.log(myAdd);
         })
         .catch((err) => {
           console.error(`Error: ${err}`);
         });
 
       //
+      console.clear();
       console.log("\n");
       inquirer
         .prompt([
@@ -86,17 +54,15 @@ dns.resolve("a16z.com", (err) => {
         ])
         .then((answers) => {
           //
-          // console.clear();
+          console.clear();
           //
           if (answers.initAddr === "Yes") {
             console.log("you said yes");
           }
           if (answers.initAddr === "No") {
             console.log("\n");
-            ////////////////////////////////////////////////////////////////////////////////////////
             //prompt for and validate user address
             enterAddress();
-            ////////////////////////////////////////////////////////////////////////////////////////
           }
         })
         .catch((err) => {
@@ -110,23 +76,12 @@ dns.resolve("a16z.com", (err) => {
 
 /**
  * 
- 
- 
->Start Screen: 
-press space to continue, 
-clear screen after each prompt
-flashing underscore? or ascii animations?
+ * 
+  
+after start, ignore keypress unless inquirer is prompting user 
 
-
-
-error handling (user loses connectivity?)
-
-
-
-seeder to populate DB with restaurants/ use Yelp or other API 
-
+ seeder to populate DB with restaurants/ use Yelp or other API 
 SQL query for 5 closest restaurants 
-
 Print restaurant names to terminal, user has option to select one or esc
 
 Google Maps walking directions listed for restaurants if close (30min walking?)
@@ -134,10 +89,17 @@ Google Maps walking directions listed for restaurants if close (30min walking?)
    or if <5 are within walking distance
 
    list restaurants, give directions to restaurant 
-quickbite
-   [1,2,3,4,5, esc]
-quickbite 1 (2 | 3 | 4 | 5)
+ 
+ 
+>Start Screen: 
+clear screen after each prompt
+flashing underscore? or ascii animations?
 
+
+
+error handling (user loses connectivity?)
+
+make use of flags?
 
 manual?
 
