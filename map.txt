@@ -153,3 +153,7 @@ problem: I want to display start img, wait for user to press space, then start p
      program holds but pressing space does nothing
      thought of new approach - handle logic with Inquirer, readline, or another module
      let i = 0, on pressing space set i = 1, while loop inside exported function to detect i === 1
+
+      trying three solutions: readline module, custom keypress, keypress module 
+      not waiting, not logging anything, continuing to log once program starts, program not waiting to start
+      

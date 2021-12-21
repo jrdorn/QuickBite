@@ -139,8 +139,7 @@ quickbite
 quickbite 1 (2 | 3 | 4 | 5)
 
 
-manual, tell users to press ctrl-c to quit? or 
-detect OS/ hotkey binding and display that
+manual?
 
 
 polish comments

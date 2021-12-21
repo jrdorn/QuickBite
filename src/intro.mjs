@@ -21,6 +21,7 @@ let introImg = chalk.green(`\n
 
 \n`);
 
+//||keypress module
 // keypress(process.stdin);
 // process.stdin.on("keypress", (ch, key) => {
 //   if (key.name === "space") {
@@ -28,28 +29,60 @@ let introImg = chalk.green(`\n
 //   }
 // });
 
-//press space, then start program
-// export let intro = async () => {
+// export let intro = (async () => {
 //   console.log(introImg);
+//   await keypress();
+//   //   console.log("goodbye");
+// })();
+
+//||custom keypress
+//
+// const keypress = async () => {
+//   process.stdin.setRawMode(true);
+//   return new Promise((resolve) =>
+//     process.stdin.on("data", (data) => {
+//       const byteArray = [...data];
+//       //start program once space pressed
+//       if (byteArray.length > 0 && byteArray[0] === 32) {
+//         // process.exit(1); //quit
+//       }
+//       process.stdin.setRawMode(false);
+//       resolve();
+//     })
+//   );
 // };
 
-const keypress = async () => {
-  process.stdin.setRawMode(true);
-  return new Promise((resolve) =>
-    process.stdin.once("data", (data) => {
-      const byteArray = [...data];
-      if (byteArray.length > 0 && byteArray[0] === 3) {
-        console.log("yup");
-        process.exit(1);
-      }
-      process.stdin.setRawMode(false);
-      resolve();
-    })
-  );
-};
+// export let intro = (async () => {
+//   console.log(introImg);
+//   await keypress();
+//   //   console.log("goodbye");
+// })();
 
-export let intro = (async () => {
-  console.log(introImg);
-  await keypress();
-  console.log("goodbye");
-})().then(process.exit);
+//||keypress module
+
+//|| readline
+// import readline from "readline";
+
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+// });
+
+// let startPromise = () => {
+//   return new Promise((resolve, reject) => {
+//     rl.question("\nradarada\n", (answer) => {
+//       if (answer === " ") {
+//         console.log("yes");
+//         rl.close();
+//         resolve();
+//       } else {
+//         reject(console.log("no"));
+//       }
+//     });
+//   });
+// };
+
+// export let intro = (async () => {
+//   let answer = await startPromise();
+//   return 1;
+// })();
