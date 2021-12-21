@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/jrdorn/QuickBite#readme",
   "dependencies": {
+    "boxen": "^6.2.1",
     "chalk": "^5.0.0",
     "commander": "^8.3.0",
     "dotenv": "^10.0.0",

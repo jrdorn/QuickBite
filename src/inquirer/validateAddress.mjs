@@ -1,5 +1,6 @@
 import { enterAddress } from "./enterAddress.mjs";
 import { key } from "../key.mjs";
+import boxen from "boxen";
 import chalk from "chalk";
 import fetch from "node-fetch";
 
@@ -23,7 +24,11 @@ export let validateAddress = (addr) => {
       //
       if (err) {
         //log any errors
-        console.error(chalk.red(`Error: ${err}`));
+        console.error(
+          chalk.red(
+            boxen(`Error: ${err}`, { padding: 1, borderStyle: "arrow" })
+          )
+        );
         //prompt to reenter address
         enterAddress();
       } else {
@@ -34,8 +39,16 @@ export let validateAddress = (addr) => {
           console.log(addrSuccess);
           //
         } else {
-          console.error(chalk.red(`\nError: ${json.status}\n`));
+          console.error(
+            chalk.red(
+              boxen(`Error: ${json.status}`, {
+                padding: 1,
+                borderStyle: "arrow",
+              })
+            )
+          );
           //prompt to reenter address
+          console.log("\n");
           enterAddress();
         }
       }

@@ -1,4 +1,5 @@
 import { confirmAddress } from "./confirmAddress.mjs";
+import boxen from "boxen";
 import chalk from "chalk";
 import inquirer from "inquirer";
 
@@ -9,8 +10,16 @@ export let enterAddress = () => {
       {
         type: "input",
         name: "enterAddress",
+        prefix: "",
+        suffix: "\n\n\n",
         message: chalk.green(
-          "Please enter a valid US address in the following format:\n\n(street, city, state)\n\n"
+          boxen(
+            `Please enter a valid US address in the following format:\n\n(street, city, state)`,
+            {
+              borderStyle: "round",
+              padding: 1,
+            }
+          )
         ),
       },
     ])

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import chalk from "chalk";
+import boxen from "boxen";
 import { intro } from "../src/intro.mjs";
 import { geo } from "../src/geolocation/geo.mjs";
 import { enterAddress } from "../src/inquirer/enterAddress.mjs";
@@ -22,7 +23,15 @@ import inquirer from "inquirer";
 //Abort if user is offline
 dns.resolve("a16z.com", (err) => {
   if (err) {
-    console.error(chalk.red(`Error: you must be online to use QuickBite\n`));
+    console.error(
+      chalk.red(
+        boxen(`Error: you must be online to use QuickBite`, {
+          padding: 1,
+          borderStyle: "arrow",
+        })
+      )
+    );
+    console.log("\n");
   } else {
     (async () => {
       await intro;
@@ -46,8 +55,13 @@ dns.resolve("a16z.com", (err) => {
           {
             type: "list",
             name: "initAddr",
+            prefix: "",
+            suffix: "\n\n",
             message: chalk.green(
-              `Your address is: ${myAdd}\n\n\nIs that correct? (y/n)\n`
+              boxen(`Your address is: ${myAdd}\n\n\nIs that correct?`, {
+                borderStyle: "round",
+                padding: 1,
+              })
             ),
             choices: ["Yes", "No"],
           },
@@ -77,8 +91,8 @@ dns.resolve("a16z.com", (err) => {
 /**
  * 
  * 
-  
-after start, ignore keypress unless inquirer is prompting user 
+  flashing underscore? or ascii animations?
+
 
  seeder to populate DB with restaurants/ use Yelp or other API 
 SQL query for 5 closest restaurants 
@@ -90,12 +104,6 @@ Google Maps walking directions listed for restaurants if close (30min walking?)
 
    list restaurants, give directions to restaurant 
  
- 
->Start Screen: 
-clear screen after each prompt
-flashing underscore? or ascii animations?
-
-
 
 error handling (user loses connectivity?)
 
@@ -104,7 +112,7 @@ make use of flags?
 manual?
 
 
-polish comments
+finish comments
 
 write readme with screenshots
 

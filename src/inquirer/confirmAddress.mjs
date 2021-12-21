@@ -1,5 +1,6 @@
 import { enterAddress } from "./enterAddress.mjs";
 import { validateAddress } from "./validateAddress.mjs";
+import boxen from "boxen";
 import chalk from "chalk";
 import inquirer from "inquirer";
 
@@ -11,7 +12,14 @@ export let confirmAddress = (addr) => {
       {
         type: "list",
         name: "confirmAddress",
-        message: chalk.green(`You entered: ${addr}\n\nIs that your address?\n`),
+        prefix: "",
+        suffix: "\n",
+        message: chalk.green(
+          boxen(`You entered: ${addr}\n\nIs that your address?`, {
+            borderStyle: "round",
+            padding: 1,
+          })
+        ),
         choices: ["Yes", "No"],
       },
     ])
