@@ -1,13 +1,21 @@
 import chalk from "chalk";
+// import ora from "ora";
 import process from "process";
 import readline from "readline";
+
+//
+// const spinner = ora({ spinner: "flip" }).start();
+// const spinThis = setTimeout(() => {
+//   spinner.color = "green";
+// }, 1000);
+//
 
 //
 let introImg = chalk.green(`\n
 
 
 
-      + ------------------------------------------------------------- +         
+      * ------------------------------------------------------------- +         
       |  _____           _           _      _____    _    _           |        
       | |     |   _ _   |_|   ___   | |_   | __  |  |_|  | |_    ___  |        
       | |  |  |  | | |  | |  |  _|  | '_|  | __ -|  | |  |  _|  | -_| |        

@@ -5,18 +5,8 @@ import boxen from "boxen";
 import { intro } from "../src/intro.mjs";
 import { geo } from "../src/geolocation/geo.mjs";
 import { enterAddress } from "../src/inquirer/enterAddress.mjs";
-// import { Command } from "commander/esm.mjs";
 import dns from "dns";
 import inquirer from "inquirer";
-
-//
-// const program = new Command();
-// program
-//   .description("an app for ordering pizza")
-//   .option("-p, --peppers", "add peppers");
-// program.parse();
-// const options = program.opts();
-//
 
 //|| Main
 
@@ -91,7 +81,7 @@ dns.resolve("a16z.com", (err) => {
 /**
  * 
  * 
-  flashing underscore? or ascii animations?
+  
 
 
  seeder to populate DB with restaurants/ use Yelp or other API 
@@ -104,6 +94,7 @@ Google Maps walking directions listed for restaurants if close (30min walking?)
 
    list restaurants, give directions to restaurant 
  
+  emojis/ascii art for the type of restaurant (Chinese, Indian, Italian etc)
 
 error handling (user loses connectivity?)
 
@@ -111,6 +102,7 @@ make use of flags?
 
 manual?
 
+integrate ora spinner
 
 finish comments
 
