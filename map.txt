@@ -146,5 +146,10 @@ Problem: need inquirer to reprompt if user enters invalid input
           solution: passing value of wrong function (yes confirmation instead of address to be validated)
 
 
+problem: I want to display start img, wait for user to press space, then start program
+   keypress module preventing arrow key detection for selections Inquirer options  
+     put into own module separate from listr, thinking it might isolate that effects
 
-  
+     program holds but pressing space does nothing
+     thought of new approach - handle logic with Inquirer, readline, or another module
+     let i = 0, on pressing space set i = 1, while loop inside exported function to detect i === 1

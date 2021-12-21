@@ -6,7 +6,6 @@ import listr from "listr";
 
 let myMACs;
 let myCoords;
-// let myAdd;
 
 //handle geolocation and display progress to user
 export const geo = new listr([

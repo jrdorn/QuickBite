@@ -1,26 +1,12 @@
 #!/usr/bin/env node
 
 import chalk from "chalk";
-//
-import { cli } from "../src/index.mjs";
-//
-//Geolocation
+import { intro } from "../src/intro.mjs";
 import { geo } from "../src/geolocation/geo.mjs";
-// import { getMACAddress } from "../src/geolocation/getMACAddress.mjs";
-// import { getCoords } from "../src/geolocation/getCoords.mjs";
-// import { getAddress } from "../src/geolocation/getAddress.mjs";
-//
-//Inquirer
 import { enterAddress } from "../src/inquirer/enterAddress.mjs";
-//
 import { Command } from "commander/esm.mjs";
-//
 import dns from "dns";
 import inquirer from "inquirer";
-import keypress from "keypress";
-// import listr from "listr";
-import process from "process";
-//
 
 //
 // const program = new Command();
@@ -30,24 +16,6 @@ import process from "process";
 // program.parse();
 // const options = program.opts();
 //
-
-//
-let intro = chalk.green(`\n
-
-                  -------------------------------------------------------------                 
-                |  _____           _           _      _____    _    _           |               
-                | |     |   _ _   |_|   ___   | |_   | __  |  |_|  | |_    ___  |               
-                | |  |  |  | | |  | |  |  _|  | '_|  | __ -|  | |  |  _|  | -_| |               
-                | |__  _|  |___|  |_|  |___|  |_,_|  |_____|  |_|  |_|    |___| |               
-                |    |__|                                                       |               
-                  -------------------------------------------------------------                 
-
-
-                                  Press [ space ] to continue
-
-                               Press [ ctrl + c ] to quit anytime
-
-\n`);
 
 //////////////////////////
 // let myMACs;
@@ -83,25 +51,13 @@ let intro = chalk.green(`\n
 
 //|| Main
 
-//
-keypress(process.stdin);
-
-//
-process.stdin.on("keypress", (ch, key) => {
-  if (key.name === "space") {
-    console.log(key.name);
-  }
-});
-
-// process.stdin.setRawMode(true);
-
 //Abort if user is offline
 dns.resolve("a16z.com", (err) => {
   if (err) {
     console.error(chalk.red(`Error: you must be online to use QuickBite\n`));
   } else {
-    console.log(intro);
     (async () => {
+      await intro;
       let myAdd;
       await geo
         .run({
