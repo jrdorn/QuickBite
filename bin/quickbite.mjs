@@ -4,7 +4,8 @@ import chalk from "chalk";
 import boxen from "boxen";
 import { intro } from "../src/intro.mjs";
 import { geo } from "../src/geolocation/geo.mjs";
-import { enterAddress } from "../src/inquirer/enterAddress.mjs";
+import { enterAddress } from "../src/userAddress/enterAddress.mjs";
+import { findRestaurants } from "../src/restaurants/findRestaurants.mjs";
 import dns from "dns";
 import inquirer from "inquirer";
 
@@ -61,7 +62,8 @@ dns.resolve("a16z.com", (err) => {
           console.clear();
           //
           if (answers.initAddr === "Yes") {
-            console.log("you said yes");
+            //search for restaurants near address
+            findRestaurants(myAdd);
           }
           if (answers.initAddr === "No") {
             console.log("\n");
@@ -167,8 +169,10 @@ Event listeners
 const EventEmitter = require('events')
 const eventEmitter = new EventEmitter()
 
-eventEmitter.on('start', () => {
-  console.log('started)
+eventEmitter.on('start', (first, second) => {
+  console.log(`started ${first} ${second}`)
 })
-eventEmitter.('start')
+eventEmitter.('start', 1, 2)
+
+Readable and writable streams
  */
