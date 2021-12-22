@@ -84,11 +84,12 @@ dns.resolve("a16z.com", (err) => {
   
 
 
- seeder to populate DB with restaurants/ use Yelp or other API 
-SQL query for 5 closest restaurants 
-Print restaurant names to terminal, user has option to select one or esc
+# query for 5 closest restaurants 
+# Print restaurant names to terminal, user has option to select one or esc
+     case: <5 are within walking distance
+     case: none are within walking distance
 
-Google Maps walking directions listed for restaurants if close (30min walking?)
+# Google Maps walking directions listed for restaurants if close (30min walking?)
    if no restaurants in walking distance, print err 
    or if <5 are within walking distance
 
@@ -96,13 +97,27 @@ Google Maps walking directions listed for restaurants if close (30min walking?)
  
   emojis/ascii art for the type of restaurant (Chinese, Indian, Italian etc)
 
-error handling (user loses connectivity?)
+#
+# output- offer to save directions as text file, or offline Google Maps, 
+
+const gzip = require('zlib').createGzip();
+const fs = require('fs');
+const inp = fs.createReadStream('The.Matrix.1080p.mkv');
+const out = fs.createWriteStream('The.Matrix.1080p.mkv.gz');
+#
+
+
+inp.pipe(gzip).pipe(out);
+
+error handling (
+  user loses connectivity?)
 
 make use of flags?
 
 manual?
 
 integrate ora spinner
+https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
 
 finish comments
 
@@ -110,4 +125,50 @@ write readme with screenshots
 
 write error test cases
 
+
+
+
+
+
+console.time('doSomething()')
+doSomething()
+console.timeEnd('doSomething()')
+
+progress module for geo
+
+ nextTick() when you want to make sure that in the next event loop iteration that code is already executed
+
+A function passed to process.nextTick() is going to be executed on the current iteration of the event loop, after the current operation ends.
+ This means it will  execute before setTimeout(() => {}, 0)
+
+
+ Timers
+
+ const id = setInterval(() => {
+  // runs every 2 seconds
+}, 2000)
+clearInterval(id)
+
+const interval = setInterval(() => {
+  if (App.somethingIWait === 'arrived') {
+    clearInterval(interval)
+    return
+  }
+  // otherwise do things
+}, 100)
+
+ensure that in the next event loop, the code is already executed 
+process.nextTick(() =>{
+  //
+})
+
+
+Event listeners
+const EventEmitter = require('events')
+const eventEmitter = new EventEmitter()
+
+eventEmitter.on('start', () => {
+  console.log('started)
+})
+eventEmitter.('start')
  */
