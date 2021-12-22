@@ -1,11 +1,16 @@
 import { key } from "../key.mjs";
+import chalk from "chalk";
+import boxen from "boxen";
+import fetch from "node-fetch";
 
 //
+
+//search for restaurants near location
 export let findRestaurants = (addr) => {
   fetch(
-    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${addr}&inputtype=textquery&fields=formatted_address&key=${key}`,
+    `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants%near%${addr}&radius=1600&key=${key}`,
     {
-      method: "post",
+      method: "get",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -15,7 +20,7 @@ export let findRestaurants = (addr) => {
     .then((res) => res.json())
     .then((json, err) => {
       //
-      console.clear();
+      //   console.clear();
       //
       if (err) {
         //log any errors
@@ -24,14 +29,13 @@ export let findRestaurants = (addr) => {
             boxen(`Error: ${err}`, { padding: 1, borderStyle: "arrow" })
           )
         );
-        //prompt to reenter address
-        enterAddress();
       } else {
-        //return if address not accepted by Google Maps API, otherwise continue
+        //r
         if (json.status === "OK") {
           //
-          let addrSuccess = json.candidates[0].formatted_address;
-          console.log(addrSuccess);
+          for (let i = 0; i < json.results.length; i++) {
+            console.log(json.results[i].name);
+          }
           //
         } else {
           console.error(
@@ -42,12 +46,7 @@ export let findRestaurants = (addr) => {
               })
             )
           );
-          //prompt to reenter address
-          console.log("\n");
-          enterAddress();
         }
       }
     });
 };
-
-//https://maps.googleapis.com/maps/api/place/search/xml?location=49.260691,-123.137784&radius=500&sensor=false&key=*PlacesAPIKey*&types=restaurant
