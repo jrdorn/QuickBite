@@ -158,3 +158,11 @@ problem: I want to display start img, wait for user to press space, then start p
       not waiting, not logging anything, continuing to log once program starts, program not waiting to start
       Solved: use readline, close() inside Promise, export variable awaiting the resolved promise
       
+
+problem: textsearch returning restaurants out of bounds
+  try limiting range, if that doesn't work try other API method
+  nearbySearch: need to catch and save lat/lng in earlier modules
+
+
+PROBLEM: nearbySearch does not sort by distance 
+    docs: radius param doesn't- use rankby=distance returns results in ascending order

@@ -1,4 +1,5 @@
 import { enterAddress } from "./enterAddress.mjs";
+import { findRestaurants } from "../restaurants/findRestaurants.mjs";
 import { key } from "../key.mjs";
 import boxen from "boxen";
 import chalk from "chalk";
@@ -34,9 +35,9 @@ export let validateAddress = (addr) => {
       } else {
         //return if address not accepted by Google Maps API, otherwise continue
         if (json.status === "OK") {
-          //
+          //find restaurants near address
           let addrSuccess = json.candidates[0].formatted_address;
-          console.log(addrSuccess);
+          findRestaurants(addrSuccess);
           //
         } else {
           console.error(
