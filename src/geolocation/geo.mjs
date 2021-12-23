@@ -29,7 +29,6 @@ export const geo = new listr([
       ctx.addr = await getAddress(myCoords);
     },
   },
-
   {
     title: chalk.magentaBright.bold(`Format address`),
     task: (ctx) => {

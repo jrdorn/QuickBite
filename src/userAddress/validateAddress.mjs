@@ -27,7 +27,7 @@ export let validateAddress = (addr) => {
         //log any errors
         console.error(
           chalk.red(
-            boxen(`Error: ${err}`, { padding: 1, borderStyle: "arrow" })
+            boxen(`Error: ${err}`, { padding: 1, borderStyle: "round" })
           )
         );
         //prompt to reenter address
@@ -44,7 +44,7 @@ export let validateAddress = (addr) => {
             chalk.red(
               boxen(`Error: ${json.status}`, {
                 padding: 1,
-                borderStyle: "arrow",
+                borderStyle: "round",
               })
             )
           );

@@ -24,10 +24,10 @@ export const getCoords = (macAddress) => {
         if (err) {
           reject(console.error(`Error: ${err}`));
         } else {
+          //return geocoordinates
           resolve(json.location);
         }
       })
-      // .catch((err) => console.log(chalk.red(`Error: ${err.message}\n`)));
       .catch((err) => {
         return Promise.reject(err);
       });

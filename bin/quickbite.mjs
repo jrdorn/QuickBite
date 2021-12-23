@@ -81,15 +81,11 @@ dns.resolve("a16z.com", (err) => {
 //||TODO
 
 /**
- * 
- * 
-  
+ *  
 
-
-# query for 5 closest restaurants 
-# Print restaurant names to terminal, user has option to select one or esc
+# Print 1-5 restaurant names to terminal, user has option to select one or esc
      case: <5 are within walking distance
-     case: none are within walking distance
+     
 
 # Google Maps walking directions listed for restaurants if close (30min walking?)
    if no restaurants in walking distance, print err 

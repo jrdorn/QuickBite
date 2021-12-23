@@ -4,8 +4,10 @@ import chalk from "chalk";
 import boxen from "boxen";
 import fetch from "node-fetch";
 
+//
 let lat;
 let lng;
+//
 
 //search for restaurants near location
 export let findRestaurants = (addr) => {
@@ -28,7 +30,7 @@ export let findRestaurants = (addr) => {
         //log any errors
         console.error(
           chalk.red(
-            boxen(`Error: ${err}`, { padding: 1, borderStyle: "arrow" })
+            boxen(`Error: ${err}`, { padding: 1, borderStyle: "round" })
           )
         );
       } else {
@@ -42,7 +44,7 @@ export let findRestaurants = (addr) => {
             chalk.red(
               boxen(`Error: ${json.status}`, {
                 padding: 1,
-                borderStyle: "arrow",
+                borderStyle: "round",
               })
             )
           );
