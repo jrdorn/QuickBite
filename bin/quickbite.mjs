@@ -26,13 +26,14 @@ dns.resolve("a16z.com", (err) => {
   } else {
     (async () => {
       await intro;
-      let myAdd;
+      let myAdd = {};
       await geo
         .run({
           addr: "",
         })
         .then((ctx) => {
-          myAdd = ctx.addr;
+          myAdd.addr = ctx.addr;
+          myAdd.myCoords = ctx.myCoords;
         })
         .catch((err) => {
           console.error(`Error: ${err}`);
@@ -40,6 +41,7 @@ dns.resolve("a16z.com", (err) => {
 
       //
       console.clear();
+      //
       console.log("\n");
       inquirer
         .prompt([
@@ -49,7 +51,7 @@ dns.resolve("a16z.com", (err) => {
             prefix: "",
             suffix: "\n\n",
             message: chalk.green(
-              boxen(`Your address is: ${myAdd}\n\n\nIs that correct?`, {
+              boxen(`Your address is: ${myAdd.addr}\n\n\nIs that correct?`, {
                 borderStyle: "round",
                 padding: 1,
               })
@@ -63,6 +65,16 @@ dns.resolve("a16z.com", (err) => {
           //
           if (answers.initAddr === "Yes") {
             //search for restaurants near address
+            /**
+             * myAdd = {
+             *  addr: 'street address',
+             *  myCoords: {
+             *    lat: 000,
+             *    lng: 000
+             *  }
+             * }
+             */
+            //
             findRestaurants(myAdd);
           }
           if (answers.initAddr === "No") {
@@ -83,9 +95,7 @@ dns.resolve("a16z.com", (err) => {
 /**
  *  
 
-# Print 1-5 restaurant names to terminal, user has option to select one or esc
-     case: <5 are within walking distance
-     
+
 
 # Google Maps walking directions listed for restaurants if close (30min walking?)
    if no restaurants in walking distance, print err 
@@ -93,7 +103,6 @@ dns.resolve("a16z.com", (err) => {
 
    list restaurants, give directions to restaurant 
  
-  emojis/ascii art for the type of restaurant (Chinese, Indian, Italian etc)
 
 #
 # output- offer to save directions as text file, or offline Google Maps, 
@@ -103,6 +112,11 @@ const fs = require('fs');
 const inp = fs.createReadStream('The.Matrix.1080p.mkv');
 const out = fs.createWriteStream('The.Matrix.1080p.mkv.gz');
 #
+
+#call directions from userInput flow
+
+
+
 
 
 inp.pipe(gzip).pipe(out);
@@ -117,7 +131,7 @@ manual?
 integrate ora spinner
 https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
 
-finish comments
+check everything and finish comments
 
 write readme with screenshots
 

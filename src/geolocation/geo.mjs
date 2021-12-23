@@ -5,7 +5,7 @@ import chalk from "chalk";
 import listr from "listr";
 
 let myMACs;
-let myCoords;
+// let myCoords;
 
 //handle geolocation and display progress to user
 export const geo = new listr([
@@ -19,14 +19,14 @@ export const geo = new listr([
   },
   {
     title: chalk.greenBright.bold("Get geocoordinates from MACs"),
-    task: async () => {
-      myCoords = await getCoords(myMACs);
+    task: async (ctx) => {
+      ctx.myCoords = await getCoords(myMACs);
     },
   },
   {
     title: chalk.blueBright.bold("Get address from geocoordinates"),
     task: async (ctx) => {
-      ctx.addr = await getAddress(myCoords);
+      ctx.addr = await getAddress(ctx.myCoords);
     },
   },
   {

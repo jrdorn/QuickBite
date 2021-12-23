@@ -4,15 +4,10 @@ import chalk from "chalk";
 import boxen from "boxen";
 import fetch from "node-fetch";
 
-//
-let lat;
-let lng;
-//
-
 //search for restaurants near location
 export let findRestaurants = (addr) => {
   fetch(
-    `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2c${lng}&rankby=distance&type=restaurant&key=${key}`,
+    `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${addr.myCoords.lat}%2c${addr.myCoords.lng}&rankby=distance&type=restaurant&key=${key}`,
     {
       method: "get",
       headers: {
