@@ -1,4 +1,5 @@
 import { fetchDirections } from "./fetchDirections.mjs";
+import { saveFile } from "./saveFile.mjs";
 import { viewDirs } from "./viewDirs.mjs";
 import boxen from "boxen";
 import chalk from "chalk";
@@ -54,7 +55,12 @@ export let viewSaveSend = (originCoords, selectedRestaurant) => {
           } else if (answer.restOpts === "Save to file") {
             //write directions to text file
             console.clear();
-            saveFile(selectedRestaurant.name, originCoords, selectedRestaurant);
+            saveFile(
+              directions,
+              selectedRestaurant.name,
+              originCoords,
+              selectedRestaurant
+            );
           }
         })();
       }

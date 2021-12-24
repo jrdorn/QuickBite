@@ -134,6 +134,7 @@ write readme with screenshots
 
 write error test cases
 
+round error borders
 
 
 
