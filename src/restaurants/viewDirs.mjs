@@ -4,6 +4,7 @@ import chalk from "chalk";
 import inquirer from "inquirer";
 
 export let viewDirs = (directions, origin, sel) => {
+  console.clear();
   inquirer
     .prompt([
       {

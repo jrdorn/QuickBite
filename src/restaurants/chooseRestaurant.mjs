@@ -45,15 +45,16 @@ export let chooseRestaurant = (originCoords, restaurants) => {
     .then((answer) => {
       console.clear();
 
-      if (answer !== "Quit") {
+      if (answer.restDirs !== "Quit") {
         //
-        //name of restaurant -> index in list -> same index for object in overarching object
+        //name of restaurant -> index in list -> same index for object in container object
         let indexOfRest = myRest.choices.indexOf(answer.restDirs);
         let selectedRest = myRest[indexOfRest];
         //
 
         //let user view, save, or send directions
-        viewSaveSend(originCoords, selectedRest);
+
+        viewSaveSend(originCoords, selectedRest, restaurants);
       }
     });
 };

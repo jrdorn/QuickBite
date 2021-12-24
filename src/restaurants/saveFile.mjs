@@ -6,9 +6,11 @@ import inquirer from "inquirer";
 
 //save directions to file
 export let saveFile = (directions, restName, origin, sel) => {
+  console.clear();
   ////
   ////ensure this works for every OS - save to desktop and let user know
   /// or let user select where they want to save it
+  /////
 
   //ensure restaurant name doesn't violate file naming conventions
   let fileName = restName.replace(/[\\~#%&*{}/:<>?|\"-\s+]/g, "");
@@ -24,7 +26,7 @@ export let saveFile = (directions, restName, origin, sel) => {
           prefix: "",
           suffix: "\n",
           message: chalk.yellow(
-            boxen(`File already exisys`, {
+            boxen(`File already exists`, {
               borderStyle: "round",
               padding: 1,
             })
@@ -33,6 +35,7 @@ export let saveFile = (directions, restName, origin, sel) => {
         },
       ])
       .then(() => {
+        console.clear();
         viewSaveSend(origin, sel);
       });
   } else {
@@ -66,6 +69,7 @@ export let saveFile = (directions, restName, origin, sel) => {
           },
         ])
         .then(() => {
+          console.clear();
           viewSaveSend(origin, sel);
         });
     });

@@ -176,3 +176,6 @@ PROBLEM: fetch request returns data but not line-by-line text directions
                         entire JSON wasn't logged- checking json.routes[0].legs[0] = success!
 
 question- would users rather have directions given in feet or minutes, or both? or neither?
+
+error: chooseRestaurant -> select 'Quit', still continues to viewSaveSend
+      remembered past error, checked answer -> missing name, answer.restDirs
