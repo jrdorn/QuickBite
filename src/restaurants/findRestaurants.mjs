@@ -1,4 +1,4 @@
-import { giveDirections } from "./giveDirections.mjs";
+import { chooseRestaurant } from "./chooseRestaurant.mjs";
 import { key } from "../key.mjs";
 import chalk from "chalk";
 import boxen from "boxen";
@@ -32,7 +32,7 @@ export let findRestaurants = (addr) => {
         //at least one restaurant is within walking distance
         if (json.status === "OK") {
           //let user choose a restaurant or quit
-          giveDirections(json.results);
+          chooseRestaurant(addr.myCoords, json.results);
         } else {
           //log if no results are within walking distance, or another error occurred
           console.error(

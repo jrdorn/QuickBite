@@ -166,3 +166,13 @@ problem: textsearch returning restaurants out of bounds
 
 PROBLEM: nearbySearch does not sort by distance 
     docs: radius param doesn't- use rankby=distance returns results in ascending order
+
+
+PROBLEM: fetch request returns data but not line-by-line text directions 
+  potential solutions: somehow turn json into line-by line directions
+                        try Node library
+                        start a server, serve data, scrape line-by-line directions
+                          may have read somewhere Google Maps forces users to display a map, may be true and that would break ToS?
+                        entire JSON wasn't logged- checking json.routes[0].legs[0] = success!
+
+question- would users rather have directions given in feet or minutes, or both? or neither?
