@@ -54,8 +54,6 @@ export let chooseRestaurant = (originCoords, restaurants) => {
 
         //let user view, save, or send directions
         viewSaveSend(originCoords, selectedRest);
-        //pass down origin lat/lng, and destination lat/lng
-        //
       }
     });
 };
