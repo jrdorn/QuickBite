@@ -37,12 +37,15 @@ export let viewSaveSend = (originCoords, selectedRestaurant) => {
             originCoords,
             selectedRestaurant
           );
+
           //
           //   (also save dirs locally for session, so making the same call doesn't make multiple API requests)
           //
 
-          if (answer === "View directions") {
+          if (answer.restOpts === "View directions") {
             //print walking directions, press enter to return to list
+            // viewDirs(directions, originCoords, selectedRestaurant);
+            console.clear();
             viewDirs(directions, originCoords, selectedRestaurant);
             //
           } else if (answer.restOpts === "Email directions") {

@@ -12,15 +12,16 @@ export let viewDirs = (directions, origin, sel) => {
         prefix: "",
         suffix: "\n",
         message: chalk.green(
-          boxen(`DIRECTIONS`, {
+          boxen(`${directions}`, {
             borderStyle: "round",
             padding: 1,
           })
         ),
-        choices: ["Return", "stay"],
+        choices: ["Return"],
       },
     ])
     .then(() => {
+      console.clear();
       viewSaveSend(origin, sel);
     });
 };
