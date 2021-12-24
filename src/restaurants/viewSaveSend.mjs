@@ -2,6 +2,7 @@ import { fetchDirections } from "./fetchDirections.mjs";
 import { viewDirs } from "./viewDirs.mjs";
 import boxen from "boxen";
 import chalk from "chalk";
+import fs from "fs";
 import inquirer from "inquirer";
 
 //view, save, or send directions
@@ -47,13 +48,24 @@ export let viewSaveSend = (originCoords, selectedRestaurant) => {
             // viewDirs(directions, originCoords, selectedRestaurant);
             console.clear();
             viewDirs(directions, originCoords, selectedRestaurant);
-            //
           } else if (answer.restOpts === "Email directions") {
             //prompt for email, validate and reprompt if invalid, success screen and ask if they want to return to list or quit
           } else if (answer.restOpts === "Send via SMS") {
             //message and data rates may apply
           } else if (answer.restOpts === "Save to file") {
-            //writable stream
+            //write directions to text file
+            ////
+            ////ensure this works for every OS - save to desktop
+            ////create file if it does not exist
+            ////ignore if it already does exist
+            ////validate restaurant name/ ensure it doesn't violate file naming conventions
+            ////
+            fs.writeFile(`./test.txt`, `${directions}`, (err) => {
+              if (err) {
+                return console.log(err);
+              }
+              console.log("Success!");
+            });
           }
         })();
       }

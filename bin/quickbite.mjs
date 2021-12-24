@@ -95,25 +95,22 @@ dns.resolve("a16z.com", (err) => {
 /**
  *  
 
+#save to file
+
+#email
+
+#sms
+
+#return to menu from viewSaveSend
 
 
-# Google Maps walking directions listed for restaurants if close (30min walking?)
-   if no restaurants in walking distance, print err 
-   or if <5 are within walking distance
 
-   list restaurants, give directions to restaurant 
+#option to change address?
+  
+#what if <5 are within walking distance? verify this works
  
 
-#
-# output- offer to save directions as text file, or offline Google Maps, 
 
-const gzip = require('zlib').createGzip();
-const fs = require('fs');
-const inp = fs.createReadStream('The.Matrix.1080p.mkv');
-const out = fs.createWriteStream('The.Matrix.1080p.mkv.gz');
-#
-
-#call directions from userInput flow
 
 
 
