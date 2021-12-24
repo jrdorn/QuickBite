@@ -2,7 +2,6 @@ import { fetchDirections } from "./fetchDirections.mjs";
 import { viewDirs } from "./viewDirs.mjs";
 import boxen from "boxen";
 import chalk from "chalk";
-import fs from "fs";
 import inquirer from "inquirer";
 
 //view, save, or send directions
@@ -54,18 +53,8 @@ export let viewSaveSend = (originCoords, selectedRestaurant) => {
             //message and data rates may apply
           } else if (answer.restOpts === "Save to file") {
             //write directions to text file
-            ////
-            ////ensure this works for every OS - save to desktop
-            ////create file if it does not exist
-            ////ignore if it already does exist
-            ////validate restaurant name/ ensure it doesn't violate file naming conventions
-            ////
-            fs.writeFile(`./test.txt`, `${directions}`, (err) => {
-              if (err) {
-                return console.log(err);
-              }
-              console.log("Success!");
-            });
+            console.clear();
+            saveFile(selectedRestaurant.name, originCoords, selectedRestaurant);
           }
         })();
       }
