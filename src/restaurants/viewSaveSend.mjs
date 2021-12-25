@@ -1,10 +1,10 @@
+import { chooseRestaurant } from "./chooseRestaurant.mjs";
 import { fetchDirections } from "./fetchDirections.mjs";
 import { saveFile } from "./saveFile.mjs";
 import { viewDirs } from "./viewDirs.mjs";
 import boxen from "boxen";
 import chalk from "chalk";
 import inquirer from "inquirer";
-import { chooseRestaurant } from "./chooseRestaurant.mjs";
 
 //view, save, or send directions
 export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
@@ -32,8 +32,8 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
       },
     ])
     .then((answer) => {
-      if (answer.restOpts !== "Return") {
-        (async () => {
+      (async () => {
+        if (answer.restOpts !== "Return to menu") {
           //get directions
           let directions = await fetchDirections(
             originCoords,
@@ -54,16 +54,12 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
             //message and data rates may apply
           } else if (answer.restOpts === "Save to file") {
             //write directions to text file
-            saveFile(
-              directions,
-              selectedRestaurant.name,
-              originCoords,
-              selectedRestaurant
-            );
+            saveFile(directions, originCoords, selectedRestaurant, restaurants);
           }
-        })();
-      }
-      //return to result list
-      chooseRestaurant(originCoords, selectedRestaurant, restaurants);
+        } else {
+          //return to result list
+          chooseRestaurant(originCoords, selectedRestaurant, restaurants);
+        }
+      })();
     });
 };

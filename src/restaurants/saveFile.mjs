@@ -6,15 +6,21 @@ import inquirer from "inquirer";
 import os from "os";
 
 //save directions to file
-export let saveFile = (directions, restName, origin, sel) => {
+export let saveFile = (directions, origin, sel, restaurants) => {
   console.clear();
 
   //get path to desktop (OS agnostic)
   let desktopDir = `${os.homedir()}/Desktop`;
 
   //ensure restaurant name doesn't violate file naming conventions
-  let fileName = restName.replace(/[\\~#%&*{}/:<>?|\"-\s+]/g, "");
-  fileName = `${desktopDir}${fileName.toLowerCase()}.txt`;
+  let fileName = sel.name.replace(/[\\~#%&*{}/:<>?|\"-\s+]/g, "");
+
+  //handle Windows format
+  if (os.type() === "Windows_NT") {
+    fileName = `${desktopDir}\\${fileName.toLowerCase()}.txt`;
+  } else {
+    fileName = `${desktopDir}/${fileName.toLowerCase()}.txt`;
+  }
 
   //ignore and return success if the file already exists
   if (fs.existsSync(fileName)) {
@@ -70,8 +76,22 @@ export let saveFile = (directions, restName, origin, sel) => {
         ])
         .then(() => {
           console.clear();
-          viewSaveSend(origin, sel);
+          viewSaveSend(origin, sel, restaurants);
         });
     });
   }
 };
+
+/**
+ * err: saveFile -> return to menu
+ *
+ * console.clear() What do you want to do next?
+ *
+ * Choose a restaurant-> only option is Quit
+ *
+ *
+ * returns to viewSaveSend then skips to chooseRestaurant
+ *
+ * err: still not saving to desktop,
+ *      still not staying on viewSaveSend
+ */
