@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 /**
  * 
  *
- (check local storage before calling fetchDirections)
+ check local storage before calling fetchDirections
  *
  */
 

@@ -92,6 +92,5 @@ export let saveFile = (directions, origin, sel, restaurants) => {
  *
  * returns to viewSaveSend then skips to chooseRestaurant
  *
- * err: still not saving to desktop,
- *      still not staying on viewSaveSend
+ * err: still not staying on viewSaveSend
  */

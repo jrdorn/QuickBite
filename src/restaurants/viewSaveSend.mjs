@@ -1,4 +1,5 @@
 import { chooseRestaurant } from "./chooseRestaurant.mjs";
+// import { directionStorage } from "./directionStorage.mjs";
 import { fetchDirections } from "./fetchDirections.mjs";
 import { saveFile } from "./saveFile.mjs";
 import { viewDirs } from "./viewDirs.mjs";
@@ -33,30 +34,28 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
     ])
     .then((answer) => {
       (async () => {
-        if (answer.restOpts !== "Return to menu") {
-          //get directions
-          let directions = await fetchDirections(
-            originCoords,
-            selectedRestaurant
-          );
+        //get directions
+        let directions = await fetchDirections(
+          originCoords,
+          selectedRestaurant
+        );
 
-          //
-          //   (also save dirs locally for session, so making the same call doesn't make multiple API requests)
-          //
+        //
+        //   (also save dirs locally for session, so making the same call doesn't make multiple API requests)
+        //
 
-          if (answer.restOpts === "View directions") {
-            //print walking directions, press enter to return to list
-            // viewDirs(directions, originCoords, selectedRestaurant);
-            viewDirs(directions, originCoords, selectedRestaurant);
-          } else if (answer.restOpts === "Email directions") {
-            //prompt for email, validate and reprompt if invalid, success screen and ask if they want to return to list or quit
-          } else if (answer.restOpts === "Send via SMS") {
-            //message and data rates may apply
-          } else if (answer.restOpts === "Save to file") {
-            //write directions to text file
-            saveFile(directions, originCoords, selectedRestaurant, restaurants);
-          }
-        } else {
+        if (answer.restOpts === "View directions") {
+          //print walking directions, press enter to return to list
+          // viewDirs(directions, originCoords, selectedRestaurant);
+          viewDirs(directions, originCoords, selectedRestaurant);
+        } else if (answer.restOpts === "Email directions") {
+          //prompt for email, validate and reprompt if invalid, success screen and ask if they want to return to list or quit
+        } else if (answer.restOpts === "Send via SMS") {
+          //message and data rates may apply
+        } else if (answer.restOpts === "Save to file") {
+          //write directions to text file
+          saveFile(directions, originCoords, selectedRestaurant, restaurants);
+        } else if (answer.restOpts === "Return to menu") {
           //return to result list
           chooseRestaurant(originCoords, selectedRestaurant, restaurants);
         }

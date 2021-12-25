@@ -94,14 +94,21 @@ dns.resolve("a16z.com", (err) => {
 
 /**
  *  
+ * 
+ 
 
-#save to file
+#fix saveFile glitch
 
 #email
 
 #sms
 
-#return to menu from viewSaveSend
+
+
+#fix return to menu from viewSaveSend
+
+#save origin/ destination to directionStorage, check before calling fetch 
+
 
 
 
