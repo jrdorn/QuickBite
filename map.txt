@@ -179,3 +179,9 @@ question- would users rather have directions given in feet or minutes, or both? 
 
 error: chooseRestaurant -> select 'Quit', still continues to viewSaveSend
       remembered past error, checked answer -> missing name, answer.restDirs
+
+bug: selecting one restaurant then immediately returning to chooseRestaurant works,
+    but after viewing (or saving, if file already exists) 
+       returns "cannot read properties of undefined (reading 'length')  | let resLength = restaurants.length"
+    restaurants object getting lost?
+        viewDirs doesn't get receive {restaurants}, saveFile doesn't pass {restaurants} back on error

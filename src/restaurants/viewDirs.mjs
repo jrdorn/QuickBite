@@ -3,7 +3,7 @@ import boxen from "boxen";
 import chalk from "chalk";
 import inquirer from "inquirer";
 
-export let viewDirs = (directions, origin, sel) => {
+export let viewDirs = (directions, origin, sel, restaurants) => {
   console.clear();
   inquirer
     .prompt([
@@ -23,6 +23,6 @@ export let viewDirs = (directions, origin, sel) => {
     ])
     .then(() => {
       console.clear();
-      viewSaveSend(origin, sel);
+      viewSaveSend(origin, sel, restaurants);
     });
 };

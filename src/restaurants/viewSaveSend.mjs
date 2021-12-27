@@ -46,7 +46,7 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
 
         if (answer.restOpts === "View directions") {
           //print walking directions, press enter to return to list
-          viewDirs(directions, originCoords, selectedRestaurant);
+          viewDirs(directions, originCoords, selectedRestaurant, restaurants);
         } else if (answer.restOpts === "Email directions") {
           //prompt for email, validate and reprompt if invalid, success screen and ask if they want to return to list or quit
           //TODO
@@ -58,7 +58,7 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
           saveFile(directions, originCoords, selectedRestaurant, restaurants);
         } else if (answer.restOpts === "Return to menu") {
           //return to result list
-          chooseRestaurant(originCoords, selectedRestaurant, restaurants);
+          chooseRestaurant(originCoords, restaurants);
         }
       })();
     });

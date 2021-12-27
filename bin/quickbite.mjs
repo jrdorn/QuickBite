@@ -95,23 +95,18 @@ dns.resolve("a16z.com", (err) => {
 /**
  *  
  * 
- 
-
-#fix viewSaveSend routing bug
-
-
+ * 
 #email
 
 #sms
 
 
 
-#save origin/ destination to directionStorage.mjs and check before calling fetch 
+#fix confirmAddress. route
 
+#save origin/ destination to directionStorage and check before calling fetch 
 
-
-
-#option to change address?
+#option to change address in chooseRestaurant, instead of having to restart
   
 #what if <5 are within walking distance? verify this works
  

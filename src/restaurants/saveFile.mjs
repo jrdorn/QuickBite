@@ -42,7 +42,7 @@ export let saveFile = (directions, origin, sel, restaurants) => {
       ])
       .then(() => {
         console.clear();
-        viewSaveSend(origin, sel);
+        viewSaveSend(origin, sel, restaurants);
       });
   } else {
     //try to write directions to text file
