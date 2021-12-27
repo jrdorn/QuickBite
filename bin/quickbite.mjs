@@ -97,7 +97,8 @@ dns.resolve("a16z.com", (err) => {
  * 
  
 
-#fix saveFile glitch
+#fix viewSaveSend routing bug
+
 
 #email
 
@@ -105,9 +106,7 @@ dns.resolve("a16z.com", (err) => {
 
 
 
-#fix return to menu from viewSaveSend
-
-#save origin/ destination to directionStorage, check before calling fetch 
+#save origin/ destination to directionStorage.mjs and check before calling fetch 
 
 
 

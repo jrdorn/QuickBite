@@ -74,7 +74,7 @@ export let saveFile = (directions, origin, sel, restaurants) => {
             choices: ["Return"],
           },
         ])
-        .then(() => {
+        .then((ans) => {
           console.clear();
           viewSaveSend(origin, sel, restaurants);
         });

@@ -46,12 +46,13 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
 
         if (answer.restOpts === "View directions") {
           //print walking directions, press enter to return to list
-          // viewDirs(directions, originCoords, selectedRestaurant);
           viewDirs(directions, originCoords, selectedRestaurant);
         } else if (answer.restOpts === "Email directions") {
           //prompt for email, validate and reprompt if invalid, success screen and ask if they want to return to list or quit
+          //TODO
         } else if (answer.restOpts === "Send via SMS") {
           //message and data rates may apply
+          //TODO
         } else if (answer.restOpts === "Save to file") {
           //write directions to text file
           saveFile(directions, originCoords, selectedRestaurant, restaurants);
