@@ -96,22 +96,26 @@ dns.resolve("a16z.com", (err) => {
  *  
  * 
  * 
+
+
+
 #email
 
 #sms
 
 
 
-#fix confirmAddress. route
 
-#save origin/ destination to directionStorage and check before calling fetch 
+
+#fix confirmAddress route
+
+#save origin/ destination to directionStorage (or async hooks?) check before calling fetch 
 
 #option to change address in chooseRestaurant, instead of having to restart
   
 #what if <5 are within walking distance? verify this works
  
-
-
+# src/main.js
 
 
 
