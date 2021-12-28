@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 
 //send directions via email or SMS
-export let sendMail = (directions) => {
+export let sendMail = (directions, recipient) => {
   //get email credentials from env
   const config = dotenv.config();
   if (config.error) {
@@ -15,9 +15,7 @@ export let sendMail = (directions) => {
   //initialize server
   const app = express();
   const port = 3000;
-  app.listen(port, () => {
-    console.log(`listening at port ${port}`);
-  });
+  app.listen(port, () => {});
 
   //SMTP transporter
   (async () => {
@@ -35,9 +33,9 @@ export let sendMail = (directions) => {
     //send mail to user's contact
     let info = await transporter.sendMail({
       from: `"QuickBite" ${email}`,
-      to: "jr_dorn@yahoo.com",
-      subject: `Directinos to ${RADARADA}`,
-      text: `${rada}`,
+      to: `${recipient}`,
+      subject: `Directions to restaurant`,
+      text: `${directions}`,
       // html: "<b>Gm to you</b>", // html body
     });
 

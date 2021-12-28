@@ -11,6 +11,7 @@ import inquirer from "inquirer";
 
 //view, save, or send directions
 export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
+  console.log("\n");
   //prompt if user wants to view directions and return, save to text? file, or send via SMS/ email
   inquirer
     .prompt([
@@ -49,15 +50,19 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
         if (answer.restOpts === "View directions") {
           //print walking directions, press enter to return to list
           viewDirs(directions, originCoords, selectedRestaurant, restaurants);
+          //
         } else if (answer.restOpts === "Email directions") {
           //prompt for email, validate and reprompt if invalid, success screen and ask if they want to return to list or quit
-          promptMail();
+          promptMail(directions, "email address");
+          //
         } else if (answer.restOpts === "Send via SMS") {
           //prompt user to select supported service provider, then follow same flow as email directions
-          smsGateway(originCoords, selectedRestaurant, restaurants);
+          smsGateway(directions, originCoords, selectedRestaurant, restaurants);
+          //
         } else if (answer.restOpts === "Save to file") {
           //write directions to text file
           saveFile(directions, originCoords, selectedRestaurant, restaurants);
+          //
         } else if (answer.restOpts === "Return to menu") {
           //return to result list
           chooseRestaurant(originCoords, restaurants);
@@ -65,3 +70,7 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
       })();
     });
 };
+
+/**
+ * return to menu after sending directions
+ */

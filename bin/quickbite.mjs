@@ -93,16 +93,11 @@ dns.resolve("a16z.com", (err) => {
 //||TODO
 
 /**
- *  
- * 
- * 
+ *   
 
 
 
-#email
-
-#sms
-
+#fix route for email and SMS- return after completion
 
 
 
@@ -134,6 +129,8 @@ integrate ora spinner
 https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
 
 check everything and finish comments
+
+formatting (new lines etc)
 
 write readme with screenshots
 

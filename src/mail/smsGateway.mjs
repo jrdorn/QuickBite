@@ -5,7 +5,14 @@ import chalk from "chalk";
 import inquirer from "inquirer";
 
 //have user select supported service provider
-export let smsGateway = (originCoords, selectedRestaurant, restaurants) => {
+export let smsGateway = (
+  directions,
+  originCoords,
+  selectedRestaurant,
+  restaurants
+) => {
+  console.clear();
+  console.log("\n");
   inquirer
     .prompt([
       {
@@ -60,6 +67,6 @@ export let smsGateway = (originCoords, selectedRestaurant, restaurants) => {
         viewSaveSend(originCoords, selectedRestaurant, restaurants);
       }
       //prompt user for their phone number
-      promptMail(gateway);
+      promptMail(directions, "phone number", gateway);
     });
 };

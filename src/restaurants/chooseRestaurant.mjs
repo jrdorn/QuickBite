@@ -6,6 +6,7 @@ import inquirer from "inquirer";
 //let user choose to view/ save/ send walking directions for 1-5 restaurants
 export let chooseRestaurant = (originCoords, restaurants) => {
   console.clear();
+  console.log("\n");
   let resLength = restaurants.length;
   //display at most 5 restaurants
   if (resLength > 5) {
