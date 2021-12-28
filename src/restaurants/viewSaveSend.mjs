@@ -1,6 +1,7 @@
 import { chooseRestaurant } from "./chooseRestaurant.mjs";
 // import { directionStorage } from "./directionStorage.mjs";
 import { fetchDirections } from "./fetchDirections.mjs";
+// import { sendMail } from "../sendMail.mjs";
 import { saveFile } from "./saveFile.mjs";
 import { viewDirs } from "./viewDirs.mjs";
 import boxen from "boxen";
