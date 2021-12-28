@@ -1,7 +1,8 @@
 import { chooseRestaurant } from "./chooseRestaurant.mjs";
 // import { directionStorage } from "./directionStorage.mjs";
 import { fetchDirections } from "./fetchDirections.mjs";
-// import { sendMail } from "../sendMail.mjs";
+import { promptMail } from "../mail/promptMail.mjs";
+import { smsGateway } from "../mail/smsGateway.mjs";
 import { saveFile } from "./saveFile.mjs";
 import { viewDirs } from "./viewDirs.mjs";
 import boxen from "boxen";
@@ -50,10 +51,10 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
           viewDirs(directions, originCoords, selectedRestaurant, restaurants);
         } else if (answer.restOpts === "Email directions") {
           //prompt for email, validate and reprompt if invalid, success screen and ask if they want to return to list or quit
-          //TODO
+          promptMail();
         } else if (answer.restOpts === "Send via SMS") {
-          //message and data rates may apply
-          //TODO
+          //prompt user to select supported service provider, then follow same flow as email directions
+          smsGateway(originCoords, selectedRestaurant, restaurants);
         } else if (answer.restOpts === "Save to file") {
           //write directions to text file
           saveFile(directions, originCoords, selectedRestaurant, restaurants);

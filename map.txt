@@ -185,3 +185,8 @@ bug: selecting one restaurant then immediately returning to chooseRestaurant wor
        returns "cannot read properties of undefined (reading 'length')  | let resLength = restaurants.length"
     restaurants object getting lost?
         viewDirs doesn't get receive {restaurants}, saveFile doesn't pass {restaurants} back on error
+
+
+design: instead of paying for SMS gateway, get list of most common SMS providers that capture 90%+ of the US market
+   and have user select their provider
+
