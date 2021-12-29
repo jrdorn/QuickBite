@@ -2,7 +2,6 @@ import { sendMail } from "./sendMail.mjs";
 import boxen from "boxen";
 import chalk from "chalk";
 import inquirer from "inquirer";
-import ora from "ora";
 
 //prompt for and validate user's email
 export let promptMail = (
@@ -62,15 +61,3 @@ export let promptMail = (
       );
     });
 };
-
-/**
- * validate email
- * ora spinner, or another animation while sendMail processing
- */
-
-//
-// const spinner = ora({ spinner: "flip" }).start();
-// const spinThis = setTimeout(() => {
-//   spinner.color = "green";
-// }, 1000);
-//

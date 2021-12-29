@@ -86,8 +86,6 @@ dns.resolve("a16z.com", (err) => {
 
 #fix confirmAddress route
 
-#save origin/ destination to directionStorage (or async hooks?) check before calling fetch 
-
 #option to change address in chooseRestaurant, instead of having to restart
   
 #what if <5 are within walking distance? verify this works
@@ -96,9 +94,27 @@ dns.resolve("a16z.com", (err) => {
 
 
 # Upcoming Features #
+-save origin/ destination to directionStorage (or async hooks?) check before calling fetch 
+-keep track of email address- prompt if user wants to use previously entered or new address
+-refactor promptMail validation
+-support for SMS
+-ora spinner for sendMail async 
 
-#keep track of email address- prompt if user wants to use previously entered or new address
 
+    // const spinner = ora({ spinner: "flip" }).start();
+    // const spinThis = setInterval(() => {
+    //   spinner.color = "green";
+    // }, 1000);
+
+    // clearInterval(spinThis);
+
+    // const interval = setInterval(() => {
+    //   if (App.somethingIWait === "arrived") {
+    //     clearInterval(interval);
+    //     return;
+    //   }
+    //   // otherwise do things
+    // }, 100);
 
 
 inp.pipe(gzip).pipe(out);
@@ -110,8 +126,6 @@ make use of flags?
 
 manual?
 
-integrate ora spinner
-https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
 
 check everything and finish comments
 
@@ -125,39 +139,9 @@ round error borders
 
 
 
-
-
-console.time('doSomething()')
-doSomething()
-console.timeEnd('doSomething()')
-
 progress module for geo
 
- nextTick() when you want to make sure that in the next event loop iteration that code is already executed
 
-A function passed to process.nextTick() is going to be executed on the current iteration of the event loop, after the current operation ends.
- This means it will  execute before setTimeout(() => {}, 0)
-
-
- Timers
-
- const id = setInterval(() => {
-  // runs every 2 seconds
-}, 2000)
-clearInterval(id)
-
-const interval = setInterval(() => {
-  if (App.somethingIWait === 'arrived') {
-    clearInterval(interval)
-    return
-  }
-  // otherwise do things
-}, 100)
-
-ensure that in the next event loop, the code is already executed 
-process.nextTick(() =>{
-  //
-})
 
 
 Event listeners
@@ -169,5 +153,4 @@ eventEmitter.on('start', (first, second) => {
 })
 eventEmitter.('start', 1, 2)
 
-Readable and writable streams
  */

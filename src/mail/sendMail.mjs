@@ -56,6 +56,7 @@ export let sendMail = (
     })
     .then(() => {
       //display success and return to menu
+
       inquirer
         .prompt([
           {

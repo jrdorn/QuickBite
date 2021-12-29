@@ -31,7 +31,6 @@ export let confirmAddress = (addr) => {
         //validate input address
         validateAddress(addr);
       } else {
-        console.log("\n");
         //prompt to reenter address
         enterAddress();
       }

@@ -5,6 +5,7 @@ import inquirer from "inquirer";
 
 //prompt user to enter their address
 export let enterAddress = () => {
+  console.log("\n");
   inquirer
     .prompt([
       {
@@ -24,9 +25,7 @@ export let enterAddress = () => {
       },
     ])
     .then((answer) => {
-      //
       console.clear();
-      //
       confirmAddress(answer.enterAddress);
     });
 };
