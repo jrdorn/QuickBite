@@ -60,25 +60,12 @@ dns.resolve("a16z.com", (err) => {
           },
         ])
         .then((answers) => {
-          //
           console.clear();
-          //
           if (answers.initAddr === "Yes") {
             //search for restaurants near address
-            /**
-             * myAdd = {
-             *  addr: 'street address',
-             *  myCoords: {
-             *    lat: 000,
-             *    lng: 000
-             *  }
-             * }
-             */
-            //
             findRestaurants(myAdd);
           }
           if (answers.initAddr === "No") {
-            console.log("\n");
             //prompt for and validate user address
             enterAddress();
           }
@@ -95,16 +82,6 @@ dns.resolve("a16z.com", (err) => {
 /**
  *   
 
-#validate phone and email (strip phone numbers to just digits)
-
-#SMS working?
-
-#message sent-success screen
-#fix route for email and SMS- return after completion
-
-
-
-
 #fix confirmAddress route
 
 #save origin/ destination to directionStorage (or async hooks?) check before calling fetch 
@@ -113,7 +90,6 @@ dns.resolve("a16z.com", (err) => {
   
 #what if <5 are within walking distance? verify this works
  
-# src/main.js
 
 
 
@@ -133,7 +109,7 @@ https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
 
 check everything and finish comments
 
-formatting (new lines etc)
+formatting (new lines, clear screen etc)
 
 write readme with screenshots
 

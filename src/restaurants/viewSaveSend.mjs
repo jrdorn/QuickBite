@@ -2,7 +2,6 @@ import { chooseRestaurant } from "./chooseRestaurant.mjs";
 // import { directionStorage } from "./directionStorage.mjs";
 import { fetchDirections } from "./fetchDirections.mjs";
 import { promptMail } from "../mail/promptMail.mjs";
-import { smsGateway } from "../mail/smsGateway.mjs";
 import { saveFile } from "./saveFile.mjs";
 import { viewDirs } from "./viewDirs.mjs";
 import boxen from "boxen";
@@ -52,7 +51,7 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
           //
         } else if (answer.restOpts === "Email directions") {
           //prompt for email, validate and reprompt if invalid, success screen and ask if they want to return to list or quit
-          promptMail(directions);
+          promptMail(directions, originCoords, selectedRestaurant, restaurants);
           //
         } else if (answer.restOpts === "Save to file") {
           //write directions to text file

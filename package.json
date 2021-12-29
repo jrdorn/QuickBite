@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Provide directions to 5 restaurants within walking distance",
-  "main": "src/main.js",
+  "main": "bin/quickbite.mjs",
   "bin": {
     "quickbite": "bin/quickbite.mjs"
   },

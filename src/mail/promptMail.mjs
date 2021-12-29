@@ -4,7 +4,12 @@ import chalk from "chalk";
 import inquirer from "inquirer";
 
 //prompt for and validate user's email
-export let promptMail = (directions) => {
+export let promptMail = (
+  directions,
+  originCoords,
+  selectedRestaurant,
+  restaurants
+) => {
   console.clear();
   console.log("\n");
   inquirer
@@ -34,6 +39,12 @@ export let promptMail = (directions) => {
       console.clear();
 
       //send directions to email
-      sendMail(directions, recipient.promptMail);
+      sendMail(
+        directions,
+        recipient.promptMail,
+        originCoords,
+        selectedRestaurant,
+        restaurants
+      );
     });
 };

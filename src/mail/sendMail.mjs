@@ -1,9 +1,18 @@
-import express from "express";
+import { viewSaveSend } from "../restaurants/viewSaveSend.mjs";
+import chalk from "chalk";
 import dotenv from "dotenv";
+import express from "express";
+import inquirer from "inquirer";
 import nodemailer from "nodemailer";
 
 //send directions via email or SMS
-export let sendMail = (directions, recipient) => {
+export let sendMail = (
+  directions,
+  recipient,
+  originCoords,
+  selectedRestaurant,
+  restaurants
+) => {
   //get email credentials from env
   const config = dotenv.config();
   if (config.error) {
@@ -23,7 +32,7 @@ export let sendMail = (directions, recipient) => {
     let transporter = nodemailer.createTransport({
       host: "smtp.yandex.com",
       port: 465,
-      secure: true, // true for 465, false for other ports
+      secure: true,
       auth: {
         user: email,
         pass: pw,
@@ -37,7 +46,29 @@ export let sendMail = (directions, recipient) => {
       subject: `Directions to restaurant`,
       text: `${directions}`,
     });
-
-    console.log("Message sent: %s", info.messageId);
-  })().catch(console.error);
+  })()
+    .catch(console.error)
+    .then(() => {
+      //display success and return to menu
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "sendMail",
+            prefix: "",
+            suffix: "\n",
+            message: chalk.green(
+              boxen(`Directions sent to ${recipient}`, {
+                borderStyle: "round",
+                padding: 1,
+              })
+            ),
+            choices: ["Return"],
+          },
+        ])
+        .then(() => {
+          console.clear();
+          viewSaveSend(originCoords, selectedRestaurant, restaurants);
+        });
+    });
 };
