@@ -95,8 +95,11 @@ dns.resolve("a16z.com", (err) => {
 /**
  *   
 
+#validate phone and email (strip phone numbers to just digits)
 
+#SMS working?
 
+#message sent-success screen
 #fix route for email and SMS- return after completion
 
 

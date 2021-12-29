@@ -36,7 +36,6 @@ export let sendMail = (directions, recipient) => {
       to: `${recipient}`,
       subject: `Directions to restaurant`,
       text: `${directions}`,
-      // html: "<b>Gm to you</b>", // html body
     });
 
     console.log("Message sent: %s", info.messageId);

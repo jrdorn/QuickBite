@@ -29,7 +29,6 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
         choices: [
           "View directions",
           "Email directions",
-          "Send via SMS",
           "Save to file",
           "Return to menu",
         ],
@@ -53,11 +52,7 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
           //
         } else if (answer.restOpts === "Email directions") {
           //prompt for email, validate and reprompt if invalid, success screen and ask if they want to return to list or quit
-          promptMail(directions, "email address");
-          //
-        } else if (answer.restOpts === "Send via SMS") {
-          //prompt user to select supported service provider, then follow same flow as email directions
-          smsGateway(directions, originCoords, selectedRestaurant, restaurants);
+          promptMail(directions);
           //
         } else if (answer.restOpts === "Save to file") {
           //write directions to text file
