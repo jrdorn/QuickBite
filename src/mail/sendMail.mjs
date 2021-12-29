@@ -1,4 +1,5 @@
 import { viewSaveSend } from "../restaurants/viewSaveSend.mjs";
+import boxen from "boxen";
 import chalk from "chalk";
 import dotenv from "dotenv";
 import express from "express";
@@ -47,7 +48,12 @@ export let sendMail = (
       text: `${directions}`,
     });
   })()
-    .catch(console.error)
+    .catch((err) => {
+      console.error(
+        chalk.red(boxen(`Error: ${err}`, { padding: 1, borderStyle: "round" }))
+      );
+      process.exit(0);
+    })
     .then(() => {
       //display success and return to menu
       inquirer

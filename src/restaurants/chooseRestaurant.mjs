@@ -57,6 +57,9 @@ export let chooseRestaurant = (originCoords, restaurants) => {
         //let user view, save, or send directions
 
         viewSaveSend(originCoords, selectedRest, restaurants);
+      } else {
+        //exit QuickBite
+        process.exit(0);
       }
     });
 };

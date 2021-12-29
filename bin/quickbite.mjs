@@ -82,6 +82,8 @@ dns.resolve("a16z.com", (err) => {
 /**
  *   
 
+
+
 #fix confirmAddress route
 
 #save origin/ destination to directionStorage (or async hooks?) check before calling fetch 
@@ -92,6 +94,10 @@ dns.resolve("a16z.com", (err) => {
  
 
 
+
+# Upcoming Features #
+
+#keep track of email address- prompt if user wants to use previously entered or new address
 
 
 
