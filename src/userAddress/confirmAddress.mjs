@@ -24,9 +24,7 @@ export let confirmAddress = (addr) => {
       },
     ])
     .then((answer) => {
-      //
       console.clear();
-      //
       if (answer.confirmAddress === "Yes") {
         //validate input address
         validateAddress(addr);

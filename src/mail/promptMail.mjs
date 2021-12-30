@@ -10,7 +10,6 @@ export let promptMail = (
   selectedRestaurant,
   restaurants
 ) => {
-  console.clear();
   console.log("\n");
   inquirer
     .prompt([
@@ -20,8 +19,6 @@ export let promptMail = (
         prefix: "",
         suffix: "\n",
         validate: (input) => {
-          //
-          //
           //ensure valid email address is entered
           return new Promise((resolve, reject) => {
             console.clear();

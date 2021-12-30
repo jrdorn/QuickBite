@@ -5,7 +5,7 @@ import boxen from "boxen";
 import chalk from "chalk";
 import fetch from "node-fetch";
 
-//
+//validate user address with Maps API
 export let validateAddress = (addr) => {
   //validate user address
   fetch(
@@ -31,7 +31,6 @@ export let validateAddress = (addr) => {
         //prompt to reenter address
         enterAddress();
       } else {
-        //return if address not accepted by Google Maps API, otherwise continue
         if (json.status === "OK") {
           //find restaurants near address
           let addrSuccess = {
@@ -42,8 +41,8 @@ export let validateAddress = (addr) => {
             },
           };
           findRestaurants(addrSuccess);
-          //
         } else {
+          //return if address not accepted by Google Maps API
           console.error(
             chalk.red(
               boxen(`Error: ${json.status}`, {
@@ -53,7 +52,7 @@ export let validateAddress = (addr) => {
             )
           );
           //prompt to reenter address
-          console.log("\n");
+          console.clear();
           enterAddress();
         }
       }

@@ -82,75 +82,52 @@ dns.resolve("a16z.com", (err) => {
 /**
  *   
 
+check everything and finish comments
 
+formatting 
+  \n
+  console.clear
+  chalk + boxen error messages
 
-#fix confirmAddress route
+write readme with screenshots
 
-#option to change address in chooseRestaurant, instead of having to restart
-  
-#what if <5 are within walking distance? verify this works
- 
+draw map of flow
+
 
 
 
 # Upcoming Features #
+-email: directions to ${restaurant name}
 -save origin/ destination to directionStorage (or async hooks?) check before calling fetch 
 -keep track of email address- prompt if user wants to use previously entered or new address
 -refactor promptMail validation
 -support for SMS
 -ora spinner for sendMail async 
+-option to change address in chooseRestaurant, instead of having to restart
+-make use of flags, man page
+-progress bars for geo module
 
 
-    // const spinner = ora({ spinner: "flip" }).start();
-    // const spinThis = setInterval(() => {
-    //   spinner.color = "green";
-    // }, 1000);
-
-    // clearInterval(spinThis);
-
-    // const interval = setInterval(() => {
-    //   if (App.somethingIWait === "arrived") {
-    //     clearInterval(interval);
-    //     return;
-    //   }
-    //   // otherwise do things
-    // }, 100);
-
-
-inp.pipe(gzip).pipe(out);
-
-error handling (
-  user loses connectivity?)
-
-make use of flags?
-
-manual?
-
-
-check everything and finish comments
-
-formatting (new lines, clear screen etc)
-
-write readme with screenshots
-
-write error test cases
-
-round error borders
+# Tests #
+-what if <5 are within walking distance? verify this works
+-email being rejected as spam
+-error handling if user loses connectivity during session
 
 
 
-progress module for geo
+  // const spinner = ora({ spinner: "flip" }).start();
+  // const spinThis = setInterval(() => {
+  //   spinner.color = "green";
+  // }, 1000);
 
+  // clearInterval(spinThis);
 
-
-
-Event listeners
-const EventEmitter = require('events')
-const eventEmitter = new EventEmitter()
-
-eventEmitter.on('start', (first, second) => {
-  console.log(`started ${first} ${second}`)
-})
-eventEmitter.('start', 1, 2)
+  // const interval = setInterval(() => {
+  //   if (App.somethingIWait === "arrived") {
+  //     clearInterval(interval);
+  //     return;
+  //   }
+  //   // otherwise do things
+  // }, 100);
 
  */

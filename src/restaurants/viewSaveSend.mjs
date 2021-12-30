@@ -1,5 +1,4 @@
 import { chooseRestaurant } from "./chooseRestaurant.mjs";
-// import { directionStorage } from "./directionStorage.mjs";
 import { fetchDirections } from "./fetchDirections.mjs";
 import { promptMail } from "../mail/promptMail.mjs";
 import { saveFile } from "./saveFile.mjs";
@@ -41,9 +40,7 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
           selectedRestaurant
         );
 
-        //
-        //   (also save dirs locally for session, so making the same call doesn't make multiple API requests)
-        //
+        console.clear();
 
         if (answer.restOpts === "View directions") {
           //print walking directions, press enter to return to list
@@ -64,7 +61,3 @@ export let viewSaveSend = (originCoords, selectedRestaurant, restaurants) => {
       })();
     });
 };
-
-/**
- * return to menu after sending directions
- */

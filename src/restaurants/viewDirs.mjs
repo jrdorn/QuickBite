@@ -3,8 +3,9 @@ import boxen from "boxen";
 import chalk from "chalk";
 import inquirer from "inquirer";
 
+//print restaurant directions to console
 export let viewDirs = (directions, origin, sel, restaurants) => {
-  console.clear();
+  console.log("\n");
   inquirer
     .prompt([
       {
