@@ -41,7 +41,7 @@ export let sendMail = (
     });
 
     //send mail to user's contact
-    let info = await transporter.sendMail({
+    await transporter.sendMail({
       from: `"QuickBite" ${email}`,
       to: `${recipient}`,
       subject: `Directions to restaurant`,

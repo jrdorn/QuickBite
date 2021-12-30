@@ -1,4 +1,6 @@
 import { key } from "../key.mjs";
+import boxen from "boxen";
+import chalk from "chalk";
 import fetch from "node-fetch";
 
 //reverse geocoding - lookup address given lat/lng
@@ -17,7 +19,13 @@ export const getAddress = (coords) => {
       .then((res) => res.json())
       .then((json, err) => {
         if (err) {
-          console.error(`Error: ${err}`);
+          reject(
+            console.error(
+              chalk.red(
+                boxen(`Error: ${err}`, { padding: 1, borderStyle: "round" })
+              )
+            )
+          );
         } else {
           resolve(json);
         }

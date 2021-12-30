@@ -106,6 +106,7 @@ draw map of flow
 -option to change address in chooseRestaurant, instead of having to restart
 -make use of flags, man page
 -progress bars for geo module
+-goodbye screen on exit
 
 
 # Tests #

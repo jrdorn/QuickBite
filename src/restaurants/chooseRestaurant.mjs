@@ -5,7 +5,6 @@ import inquirer from "inquirer";
 
 //let user choose to view/ save/ send walking directions for 1-5 restaurants
 export let chooseRestaurant = (originCoords, restaurants) => {
-  console.clear();
   console.log("\n");
   let resLength = restaurants.length;
   //display at most 5 restaurants
@@ -48,14 +47,12 @@ export let chooseRestaurant = (originCoords, restaurants) => {
       console.clear();
 
       if (answer.restDirs !== "Quit") {
-        //
         //name of restaurant -> index in list -> same index for object in container object
         let indexOfRest = myRest.choices.indexOf(answer.restDirs);
         let selectedRest = myRest[indexOfRest];
-        //
 
         //let user view, save, or send directions
-
+        console.clear();
         viewSaveSend(originCoords, selectedRest, restaurants);
       } else {
         //exit QuickBite

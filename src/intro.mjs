@@ -2,7 +2,7 @@ import chalk from "chalk";
 import process from "process";
 import readline from "readline";
 
-//
+//ASCII image to display on start
 let introImg = chalk.green(`\n
 
 
@@ -24,13 +24,13 @@ let introImg = chalk.green(`\n
 
 \n`);
 
-//
+//wait to start until user presses return
 let rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-function askQuestion(query) {
+function pressStart(query) {
   console.clear();
   console.log(introImg);
   const rl = readline.createInterface({
@@ -39,11 +39,11 @@ function askQuestion(query) {
   });
 
   return new Promise((resolve) =>
-    rl.question(query, (ans) => {
+    rl.question(query, () => {
       rl.close();
       resolve();
     })
   );
 }
 
-export let intro = await askQuestion(" ");
+export let intro = await pressStart(" ");

@@ -1,4 +1,6 @@
 import { key } from "../key.mjs";
+import boxen from "boxen";
+import chalk from "chalk";
 import fetch from "node-fetch";
 
 //find lat/lng of user
@@ -29,7 +31,13 @@ export const getCoords = (macAddress) => {
         }
       })
       .catch((err) => {
-        return Promise.reject(err);
+        return Promise.reject(
+          console.error(
+            chalk.red(
+              boxen(`Error: ${err}`, { padding: 1, borderStyle: "round" })
+            )
+          )
+        );
       });
   });
 };

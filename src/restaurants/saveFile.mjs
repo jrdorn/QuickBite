@@ -7,7 +7,7 @@ import os from "os";
 
 //save directions to file
 export let saveFile = (directions, origin, sel, restaurants) => {
-  console.clear();
+  console.log("\n");
 
   //get path to desktop (OS agnostic)
   let desktopDir = `${os.homedir()}/Desktop`;
@@ -74,23 +74,10 @@ export let saveFile = (directions, origin, sel, restaurants) => {
             choices: ["Return"],
           },
         ])
-        .then((ans) => {
+        .then(() => {
           console.clear();
           viewSaveSend(origin, sel, restaurants);
         });
     });
   }
 };
-
-/**
- * err: saveFile -> return to menu
- *
- * console.clear() What do you want to do next?
- *
- * Choose a restaurant-> only option is Quit
- *
- *
- * returns to viewSaveSend then skips to chooseRestaurant
- *
- * err: still not staying on viewSaveSend
- */

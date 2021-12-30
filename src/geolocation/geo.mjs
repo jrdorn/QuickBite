@@ -5,7 +5,6 @@ import chalk from "chalk";
 import listr from "listr";
 
 let myMACs;
-// let myCoords;
 
 //handle geolocation and display progress to user
 export const geo = new listr([

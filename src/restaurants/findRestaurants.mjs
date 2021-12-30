@@ -18,9 +18,6 @@ export let findRestaurants = (addr) => {
   )
     .then((res) => res.json())
     .then((json, err) => {
-      //
-      //   console.clear();
-      //
       if (err) {
         //log any errors
         console.error(

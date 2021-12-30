@@ -1,12 +1,7 @@
 import { key } from "../key.mjs";
+import boxen from "boxen";
+import chalk from "chalk";
 import fetch from "node-fetch";
-
-/**
- * 
- *
- check local storage before calling fetchDirections
- *
- */
 
 //fetch directions and save locally
 export const fetchDirections = (origin, dest) => {
@@ -24,7 +19,13 @@ export const fetchDirections = (origin, dest) => {
       .then((res) => res.json())
       .then((json, err) => {
         if (err) {
-          console.error(`Error: ${err}`);
+          reject(
+            console.error(
+              chalk.red(
+                boxen(`Error: ${err}`, { padding: 1, borderStyle: "round" })
+              )
+            )
+          );
         } else {
           let stepJSON = json.routes[0].legs[0].steps;
 
@@ -49,6 +50,12 @@ export const fetchDirections = (origin, dest) => {
           resolve(stepString);
         }
       })
-      .catch((err) => console.error(`Error: ${err.message}\n`));
+      .catch((err) =>
+        console.error(
+          chalk.red(
+            boxen(`Error: ${err}`, { padding: 1, borderStyle: "round" })
+          )
+        )
+      );
   });
 };
