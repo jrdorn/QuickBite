@@ -21,3 +21,13 @@ QuickBite is created with:
 - Node.js
 - Express
 - Google Maps API
+
+## Usage
+
+![intro](https://github.com/jrdorn/QuickBite/img/s01?raw=true)
+
+![get_MAC_address](https://github.com/jrdorn/QuickBite/img/s02?raw=true)
+
+![choose_restaurant](https://github.com/jrdorn/QuickBite/img/s03?raw=true)
+
+![view_save_send](https://github.com/jrdorn/QuickBite/img/s04?raw=true)

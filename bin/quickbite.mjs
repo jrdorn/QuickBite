@@ -81,17 +81,9 @@ dns.resolve("a16z.com", (err) => {
 
 /**
  *   
+ comments
 
-check everything and finish comments
-
-formatting 
-  \n
-  console.clear
-  chalk + boxen error messages
-
-write readme with screenshots
-
-draw map of flow
+  draw map of flow
 
 
 
