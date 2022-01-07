@@ -1,8 +1,7 @@
 Quick Bite. 
 
 || Brainstorming
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-??? change purpose of app? get ip, city, top 5 restaurants without directions
+change purpose of app? get ip, city, top 5 restaurants without directions
 
 get user's geolocation (lat/long)
    potentially serve HTML file and ask user to allow geolocation
