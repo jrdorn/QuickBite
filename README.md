@@ -22,12 +22,18 @@ QuickBite is created with:
 - Express
 - Google Maps API
 
+## Installation
+
+Install via NPM:
+
+Or, ---
+
 ## Usage
 
-![intro](https://github.com/jrdorn/QuickBite/img/s01?raw=true)
+![intro](https://github.com/jrdorn/QuickBite/blob/main/img/s01.png?raw=true)
 
-![get_MAC_address](https://github.com/jrdorn/QuickBite/img/s02?raw=true)
+![get_MAC_address](https://github.com/jrdorn/QuickBite/blob/main/img/s01.png?raw=true)
 
-![choose_restaurant](https://github.com/jrdorn/QuickBite/img/s03?raw=true)
+![choose_restaurant](https://github.com/jrdorn/QuickBite/blob/main/img/s01.png?raw=true)
 
-![view_save_send](https://github.com/jrdorn/QuickBite/img/s04?raw=true)
+![view_save_send](https://github.com/jrdorn/QuickBite/blob/main/img/s01.png?raw=true)
