@@ -1,5 +1,5 @@
 {
-  "name": "quickbite",
+  "name": "@jr_dorn/quickbite",
   "type": "module",
   "version": "1.0.0",
   "description": "Provide directions to 5 restaurants within walking distance",
