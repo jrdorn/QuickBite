@@ -82,12 +82,8 @@ dns.resolve("a16z.com", (err) => {
 /**
  *   
  * 
- ##############key solution
 
  
- comments
-
-  draw map of flow
 
 
 

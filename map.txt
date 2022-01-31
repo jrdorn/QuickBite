@@ -189,3 +189,11 @@ bug: selecting one restaurant then immediately returning to chooseRestaurant wor
 design: instead of paying for SMS gateway, get list of most common SMS providers that capture 90%+ of the US market
    and have user select their provider
 
+
+////////
+
+Store API keys on server-side, not client
+
+Create QuickBite API with Heroku, have CLI app make calls to that API
+
+Publish CLI app to NPM, or package it into an executable 
