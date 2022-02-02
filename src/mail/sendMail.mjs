@@ -1,7 +1,7 @@
 import { viewSaveSend } from "../restaurants/viewSaveSend.mjs";
 import boxen from "boxen";
 import chalk from "chalk";
-import dotenv from "dotenv";
+
 import express from "express";
 import inquirer from "inquirer";
 import nodemailer from "nodemailer";

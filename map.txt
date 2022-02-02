@@ -197,3 +197,8 @@ Store API keys on server-side, not client
 Create QuickBite API with Heroku, have CLI app make calls to that API
 
 Publish CLI app to NPM, or package it into an executable 
+
+
+Addressing security concerns
+Email SMTP
+ES6 module syntax (export __) vs Node CommonJS syntax (module.exports)

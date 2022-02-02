@@ -1,4 +1,3 @@
-import { key } from "../key.mjs";
 import boxen from "boxen";
 import chalk from "chalk";
 import fetch from "node-fetch";

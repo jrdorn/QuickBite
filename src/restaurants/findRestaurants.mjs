@@ -1,5 +1,4 @@
 import { chooseRestaurant } from "./chooseRestaurant.mjs";
-import { key } from "../key.mjs";
 import chalk from "chalk";
 import boxen from "boxen";
 import fetch from "node-fetch";
