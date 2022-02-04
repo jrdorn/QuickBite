@@ -11,7 +11,8 @@ export const getCoords = (macAddress) => {
 
   return new Promise((resolve, reject) => {
     //send POST request to API
-    fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${key}`, {
+    // fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${key}`, {
+    fetch(`https://quickbite-server.herokuapp.com/get-coords`, {
       method: "post",
       headers: {
         Accept: "application/json",

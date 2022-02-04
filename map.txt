@@ -202,3 +202,4 @@ Publish CLI app to NPM, or package it into an executable
 Addressing security concerns
 Email SMTP
 ES6 module syntax (export __) vs Node CommonJS syntax (module.exports)
+Heroku REST API

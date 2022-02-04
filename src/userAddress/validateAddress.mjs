@@ -8,16 +8,17 @@ import fetch from "node-fetch";
 //validate user address with Maps API
 export let validateAddress = (addr) => {
   //validate user address
-  fetch(
-    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${addr}&fields=formatted_address%2Cgeometry&inputtype=textquery&key=${key}`,
-    {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    }
-  )
+  // fetch(
+  //   `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${addr}&fields=formatted_address%2Cgeometry&inputtype=textquery&key=${key}`,
+  //   {
+  fetch(`https://quickbite-server.herokuapp.com/validate-address`, {
+    method: "post",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(addr),
+  })
     .then((res) => res.json())
     .then((json, err) => {
       console.clear();
