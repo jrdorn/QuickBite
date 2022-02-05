@@ -2,26 +2,31 @@ import boxen from "boxen";
 import chalk from "chalk";
 import fetch from "node-fetch";
 
+//quickbite-server.herokuapp.com/
+
 //fetch directions and save locally
-export const fetchDirections = (origin, dest) => {
+https: export const fetchDirections = (origin, dest) => {
   return new Promise((resolve, reject) => {
-    fetch(
-      `https://maps.googleapis.com/maps/api/directions/json?origin=${origin.lat},${origin.lng}&destination=${dest.lat},${dest.lng}&mode=walking&key=${key}`,
-      {
-        method: "get",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    // fetch(
+    //   `https://maps.googleapis.com/maps/api/directions/json?origin=${origin.lat},${origin.lng}&destination=${dest.lat},${dest.lng}&mode=walking&key=${key}`,
+    //   {
+    fetch(`quickbite-server.herokuapp.com/fetch-directions`, {
+      method: "get",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => res.json())
       .then((json, err) => {
         if (err) {
           reject(
             console.error(
               chalk.red(
-                boxen(`Error: ${err}`, { padding: 1, borderStyle: "round" })
+                boxen(`Error: ${err}`, {
+                  padding: 1,
+                  borderStyle: "round",
+                })
               )
             )
           );
