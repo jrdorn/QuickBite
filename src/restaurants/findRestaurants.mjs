@@ -14,7 +14,8 @@ export let findRestaurants = (addr) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(addr),
+    // body: JSON.stringify(addr),
+    body: JSON.stringify(addr, myCoords),
   })
     .then((res) => res.json())
     .then((json, err) => {
