@@ -5,12 +5,12 @@ import fetch from "node-fetch";
 //quickbite-server.herokuapp.com/
 
 //fetch directions and save locally
-https: export const fetchDirections = (origin, dest) => {
+export const fetchDirections = (origin, dest) => {
   return new Promise((resolve, reject) => {
     // fetch(
     //   `https://maps.googleapis.com/maps/api/directions/json?origin=${origin.lat},${origin.lng}&destination=${dest.lat},${dest.lng}&mode=walking&key=${key}`,
     //   {
-    fetch(`quickbite-server.herokuapp.com/fetch-directions`, {
+    fetch(`https://quickbite-server.herokuapp.com/fetch-directions`, {
       method: "get",
       headers: {
         Accept: "application/json",
