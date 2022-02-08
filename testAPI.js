@@ -28,3 +28,24 @@ const test0 = () => {
   });
 };
 test0();
+
+//
+//
+//the answer to life, the universe, and everything
+//getCoords
+const test0 = () => {
+  return new Promise((resolve, reject) => {
+    fetch(`https://quickbite-server.herokuapp.com/the-answer`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      //serialize body value
+      body: JSON.stringify(body),
+    })
+      .then((res) => res.json())
+      .then((json) => console.log(json));
+  });
+};
+test0();
