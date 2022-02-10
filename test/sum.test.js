@@ -10,10 +10,9 @@ test("adds 1+2=3", () => {
 expect() expectation object
 toBe() matcher
 
-toEqual to check value of an object
-
  */
 
+//check value of an object
 test("object assignment", () => {
   const data = { one: 1 };
   data["two"] = 2;

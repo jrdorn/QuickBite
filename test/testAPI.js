@@ -2,7 +2,7 @@
  * Run test API calls to quickbite server
  */
 
-import fetch from "node-fetch";
+const fetch = require("node-fetch");
 
 //getCoords
 const test0 = () => {
@@ -27,25 +27,5 @@ const test0 = () => {
       .then((json) => console.log(json));
   });
 };
-test0();
 
-//
-//
-//the answer to life, the universe, and everything
-//getCoords
-const test0 = () => {
-  return new Promise((resolve, reject) => {
-    fetch(`https://quickbite-server.herokuapp.com/the-answer`, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      //serialize body value
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then((json) => console.log(json));
-  });
-};
-test0();
+module.exports = test0;
