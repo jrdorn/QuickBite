@@ -1,5 +1,3 @@
-// require("dotenv").config();
-
 const {
   getMACAddress,
 
@@ -7,6 +5,7 @@ const {
 
   testBack,
 
+  getAddress,
   validateAddress,
   findRestaurants,
   sendMail,
@@ -28,19 +27,27 @@ test("getCoords", () => {
 });
 
 //
-//
+// verify any response send to the Heroku server
 // test.only("testBack", () => {
-// return expect(testBack()).resolves.toEqual({
-//   considerIp: "false",
-//   wifiAccessPoints: process.env.MY_MACS,
-// });
+//   return expect(testBack()).resolves.toEqual({
+//     lat: 1,
+//     lng: "2",
+//   });
 // });
 //
 //
 //
 
-// //
-// test("validateAddress", () => {
+// pass {lat: 0, lng: 0} to API and receive address
+test.only("getAddress", () => {
+  return expect(getAddress()).resolves.toEqual({
+    one: "1",
+    two: "2",
+  });
+});
+
+//
+// test.only("validateAddress", () => {
 //   return expect(validateAddress()).resolves.toEqual({ one: "1", two: "2" });
 // });
 
