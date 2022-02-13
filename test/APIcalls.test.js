@@ -38,16 +38,17 @@ test("getCoords", () => {
 //
 //
 
-// send LatLng object to API and receive street address
+// PASS: send LatLng object to API and receive street address
 test.only("getAddress", () => {
+  const expectedObj = {
+    plus_code: "foo",
+    results: "bar",
+    status: "foobar",
+  };
+
   return expect(
-    getAddress().then((ans) => {
-      return ans;
-    })
-  ).resolves.toEqual({
-    one: "1",
-    two: "2",
-  });
+    getAddress().then((serverRes) => Object.keys(serverRes))
+  ).resolves.toEqual(Object.keys(expectedObj));
 });
 
 //
