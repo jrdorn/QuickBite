@@ -25,23 +25,30 @@ require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
  *
  */
 
-// const validateAddress = () => {
-//   return new Promise((resolve, reject) => {
-//     const body = { address: "20 W 34th St, New York, NY 10001" };
-//     fetch(`https://quickbite-server.herokuapp.com/validate-address`, {
-//       // fetch(`http://localhost:5000/validate-address`, {
-//       method: "post",
-//       headers: {
-//         Accept: "application/json",
-//         "Content-Type": "application/json",
-//       },
-//       //serialize body value
-//       body: JSON.stringify(body),
-//     })
-//       .then((res) => res.json())
-//       .then((json) => resolve(json));
-//   });
-// };
-// (async () => {
-//   console.log(await validateAddress());
-// })();
+const findRestaurants = () => {
+  // (addr)
+  // addr.myCoords.lat
+  // addr.myCoords.lng
+  const body = {
+    lat: process.env.MY_LAT,
+    lng: process.env.MY_LNG,
+  };
+
+  return new Promise((resolve, reject) => {
+    fetch(`https://quickbite-server.herokuapp.com/find-restaurants`, {
+      // fetch(`http://localhost:5000/find-restaurants`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify(addr),
+      body: JSON.stringify(body),
+    })
+      .then((res) => res.json())
+      .then((json) => resolve(json));
+  });
+};
+(async () => {
+  console.log(await findRestaurants());
+})();

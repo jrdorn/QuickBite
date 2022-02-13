@@ -52,7 +52,7 @@ test("getAddress", () => {
 });
 
 // PASS: validate user address with Maps API
-test.only("validateAddress", () => {
+test("validateAddress", () => {
   const expectedObj = {
     candidates: "foo",
     status: "bar",
@@ -66,10 +66,12 @@ test.only("validateAddress", () => {
 //
 //
 //
-test("findRestaurants", () => {
+test.only("findRestaurants", () => {
   const expectedObj = {
-    foo: "foo",
-    bar: "bar",
+    html_attributions: "foo",
+    next_page_token: "bar",
+    results: "foo",
+    status: "bar",
   };
 
   return expect(
@@ -89,3 +91,7 @@ test("findRestaurants", () => {
 // test("fetchDirections", () => {
 //   return expect(fetchDirections()).resolves.toEqual({ one: "1", two: "2" });
 // });
+
+/**
+ * run through and verify each module on client and server side
+ */

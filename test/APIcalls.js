@@ -98,14 +98,6 @@ const getAddress = () => {
   });
 };
 
-//
-//
-//
-//
-//
-//
-//
-
 //|| validateAddress
 const validateAddress = () => {
   return new Promise((resolve, reject) => {
@@ -123,34 +115,46 @@ const validateAddress = () => {
       .then((json) => resolve(json));
   });
 };
-//
-//
-//
-//
 
+//
+//
+//
+//
+//
+//
+//
 //|| findRestaurants
 const findRestaurants = () => {
-  let body = {
-    one: "1",
-    two: "2",
-    // considerIp: "false",
-    // wifiAccessPoints: "21",
+  // (addr)
+  // addr.myCoords.lat
+  // addr.myCoords.lng
+  const body = {
+    lat: process.env.MY_LAT,
+    lng: process.env.MY_LNG,
   };
 
   return new Promise((resolve, reject) => {
-    fetch(`https://quickbite-server.herokuapp.com/get-coords`, {
+    fetch(`https://quickbite-server.herokuapp.com/find-restaurants`, {
+      // fetch(`http://localhost:5000/find-restaurants`, {
       method: "post",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      //serialize body value
+      // body: JSON.stringify(addr),
       body: JSON.stringify(body),
     })
       .then((res) => res.json())
       .then((json) => resolve(json));
   });
 };
+//
+//
+//
+//
+//
+//
+//
 
 //|| sendMail
 const sendMail = () => {
