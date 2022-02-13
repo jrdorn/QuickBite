@@ -39,7 +39,7 @@ test("getCoords", () => {
 //
 
 // PASS: send LatLng object to API and receive street address
-test.only("getAddress", () => {
+test("getAddress", () => {
   const expectedObj = {
     plus_code: "foo",
     results: "bar",
@@ -51,15 +51,34 @@ test.only("getAddress", () => {
   ).resolves.toEqual(Object.keys(expectedObj));
 });
 
-//
-// test.only("validateAddress", () => {
-//   return expect(validateAddress()).resolves.toEqual({ one: "1", two: "2" });
-// });
+// PASS: validate user address with Maps API
+test.only("validateAddress", () => {
+  const expectedObj = {
+    candidates: "foo",
+    status: "bar",
+  };
 
-// //
-// test("findRestaurants", () => {
-//   return expect(findRestaurants()).resolves.toEqual({ one: "1", two: "2" });
-// });
+  return expect(
+    validateAddress().then((serverRes) => Object.keys(serverRes))
+  ).resolves.toEqual(Object.keys(expectedObj));
+});
+
+//
+//
+//
+test("findRestaurants", () => {
+  const expectedObj = {
+    foo: "foo",
+    bar: "bar",
+  };
+
+  return expect(
+    findRestaurants().then((serverRes) => Object.keys(serverRes))
+  ).resolves.toEqual(Object.keys(expectedObj));
+});
+//
+//
+//
 
 // //
 // test("sendMail", () => {

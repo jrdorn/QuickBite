@@ -25,43 +25,23 @@ require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
  *
  */
 
-// const getAddress = async () => {
-//   const coords = { lat: process.env.MY_LAT, lng: process.env.MY_LNG };
-//   const response = await fetch(
-//     `https://quickbite-server.herokuapp.com/get-address`,
-//     {
+// const validateAddress = () => {
+//   return new Promise((resolve, reject) => {
+//     const body = { address: "20 W 34th St, New York, NY 10001" };
+//     fetch(`https://quickbite-server.herokuapp.com/validate-address`, {
+//       // fetch(`http://localhost:5000/validate-address`, {
 //       method: "post",
 //       headers: {
 //         Accept: "application/json",
 //         "Content-Type": "application/json",
 //       },
-//       body: JSON.stringify(coords),
-//     }
-//   );
-//   return Promise.resolve(response);
+//       //serialize body value
+//       body: JSON.stringify(body),
+//     })
+//       .then((res) => res.json())
+//       .then((json) => resolve(json));
+//   });
 // };
-// console.log(getAddress());
-
-const getAddress = () => {
-  const coords = { lat: process.env.MY_LAT, lng: process.env.MY_LNG };
-
-  return new Promise((resolve, reject) => {
-    fetch(`https://quickbite-server.herokuapp.com/get-coords`, {
-      method: "post",
-      headers: {
-        // Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      //serialize body value
-      body: JSON.stringify(coords),
-    })
-      .catch((error) => console.log(error))
-
-      .then((res) => res.json())
-
-      .catch((error) => console.log(error))
-
-      .then((json) => resolve(json));
-  });
-};
-console.log(getAddress());
+// (async () => {
+//   console.log(await validateAddress());
+// })();

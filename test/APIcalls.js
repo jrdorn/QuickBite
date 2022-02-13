@@ -46,7 +46,6 @@ const getCoords = (macs) => {
     fetch(`https://quickbite-server.herokuapp.com/get-coords`, {
       method: "post",
       headers: {
-        // Accept: "application/json",
         "Content-Type": "application/json",
       },
       //serialize body value
@@ -82,6 +81,8 @@ const testBack = () => {
 //
 //|| getAddress
 const getAddress = () => {
+  const coords = { lat: process.env.MY_LAT, lng: process.env.MY_LNG };
+
   return new Promise((resolve, reject) => {
     fetch(`https://quickbite-server.herokuapp.com/get-address`, {
       method: "post",
@@ -89,16 +90,11 @@ const getAddress = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(process.env.MY_COORDS),
+      //serialize body value
+      body: JSON.stringify(coords),
     })
       .then((res) => res.json())
-      .then((json, err) => {
-        if (err) {
-          reject(console.error(err));
-        } else {
-          resolve(json);
-        }
-      });
+      .then((json) => resolve(json));
   });
 };
 
@@ -112,15 +108,9 @@ const getAddress = () => {
 
 //|| validateAddress
 const validateAddress = () => {
-  let body = {
-    one: "1",
-    two: "2",
-    // considerIp: "false",
-    // wifiAccessPoints: "21",
-  };
-
   return new Promise((resolve, reject) => {
-    fetch(`https://quickbite-server.herokuapp.com/get-coords`, {
+    const body = { address: "20 W 34th St, New York, NY 10001" };
+    fetch(`https://quickbite-server.herokuapp.com/validate-address`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -133,6 +123,10 @@ const validateAddress = () => {
       .then((json) => resolve(json));
   });
 };
+//
+//
+//
+//
 
 //|| findRestaurants
 const findRestaurants = () => {
