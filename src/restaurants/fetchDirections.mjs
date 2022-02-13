@@ -2,8 +2,6 @@ import boxen from "boxen";
 import chalk from "chalk";
 import fetch from "node-fetch";
 
-//quickbite-server.herokuapp.com/
-
 //fetch directions and save locally
 export const fetchDirections = (origin, dest) => {
   return new Promise((resolve, reject) => {

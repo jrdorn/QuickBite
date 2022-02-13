@@ -25,30 +25,35 @@ require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
  *
  */
 
-const findRestaurants = () => {
-  // (addr)
-  // addr.myCoords.lat
-  // addr.myCoords.lng
-  const body = {
-    lat: process.env.MY_LAT,
-    lng: process.env.MY_LNG,
-  };
+// const fetchDirections = () => {
+//   // (origin, dest)
+//   //
 
-  return new Promise((resolve, reject) => {
-    fetch(`https://quickbite-server.herokuapp.com/find-restaurants`, {
-      // fetch(`http://localhost:5000/find-restaurants`, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      // body: JSON.stringify(addr),
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then((json) => resolve(json));
-  });
-};
-(async () => {
-  console.log(await findRestaurants());
-})();
+//   const body = {
+//     origin: {
+//       lat: process.env.MY_LAT,
+//       lng: process.env.MY_LNG,
+//     },
+//     dest: {
+//       lat: process.env.D_LAT,
+//       lng: process.env.D_LNG,
+//     },
+//   };
+
+//   return new Promise((resolve, reject) => {
+//     // fetch(`http://localhost:5000/fetch-directions`, {
+//     fetch(`https://quickbite-server.herokuapp.com/fetch-directions`, {
+//       method: "post",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(body),
+//     })
+//       .then((res) => res.json())
+//       .then((json) => resolve(json));
+//   });
+// };
+// (async () => {
+//   console.log(await fetchDirections());
+// })();

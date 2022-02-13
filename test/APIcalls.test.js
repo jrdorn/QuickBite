@@ -63,10 +63,8 @@ test("validateAddress", () => {
   ).resolves.toEqual(Object.keys(expectedObj));
 });
 
-//
-//
-//
-test.only("findRestaurants", () => {
+// PASS: send lat/lng to server, receive restaurant list
+test("findRestaurants", () => {
   const expectedObj = {
     html_attributions: "foo",
     next_page_token: "bar",
@@ -78,19 +76,30 @@ test.only("findRestaurants", () => {
     findRestaurants().then((serverRes) => Object.keys(serverRes))
   ).resolves.toEqual(Object.keys(expectedObj));
 });
-//
-//
+
+// PASS: send lat/lng for origin and destination to server, receive directions
+test.only("fetchDirections", () => {
+  const expectedObj = {
+    geocoded_waypoints: "foo",
+    routes: "bar",
+    status: "foobar",
+  };
+
+  return expect(
+    fetchDirections().then((serverRes) => Object.keys(serverRes))
+  ).resolves.toEqual(Object.keys(expectedObj));
+});
 //
 
-// //
-// test("sendMail", () => {
+//
+//
+//
+// test.only("sendMail", () => {
 //   return expect(sendMail()).resolves.toEqual({ one: "1", two: "2" });
 // });
-
-// //
-// test("fetchDirections", () => {
-//   return expect(fetchDirections()).resolves.toEqual({ one: "1", two: "2" });
-// });
+//
+//
+//
 
 /**
  * run through and verify each module on client and server side
