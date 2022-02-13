@@ -58,26 +58,6 @@ const getCoords = (macs) => {
 
 //
 //
-const testBack = () => {
-  return new Promise((resolve, reject) => {
-    fetch(`https://quickbite-server.herokuapp.com/testback`, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      //serialize body value
-      body: JSON.stringify(process.env.MY_COORDS),
-    })
-      .then((res) => res.json())
-      .then((json) => resolve(json));
-  });
-};
-//
-//
-
-//
-//
 //
 //|| getAddress
 const getAddress = () => {
@@ -144,15 +124,14 @@ const findRestaurants = () => {
 
 //|| sendMail
 const sendMail = () => {
+  // (directions, recipient)
   let body = {
-    one: "1",
-    two: "2",
-    // considerIp: "false",
-    // wifiAccessPoints: "21",
+    directions: process.env.MAIL_DIRS,
+    recipient: process.env.MAIL_REC,
   };
 
   return new Promise((resolve, reject) => {
-    fetch(`https://quickbite-server.herokuapp.com/get-coords`, {
+    fetch(`https://quickbite-server.herokuapp.com/send-mail`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -200,8 +179,6 @@ const fetchDirections = () => {
 exports.getMACAddress = getMACAddress;
 
 exports.getCoords = getCoords;
-
-exports.testBack = testBack;
 
 exports.getAddress = getAddress;
 

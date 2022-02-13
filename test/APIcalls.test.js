@@ -3,8 +3,6 @@ const {
 
   getCoords,
 
-  testBack,
-
   getAddress,
   validateAddress,
   findRestaurants,
@@ -25,18 +23,6 @@ test("getCoords", () => {
       .then((serverRes) => Object.keys(serverRes))
   ).resolves.toEqual(Object.keys(expectedObj));
 });
-
-//
-// verify any response send to the Heroku server
-// test.only("testBack", () => {
-//   return expect(testBack()).resolves.toEqual({
-//     lat: 1,
-//     lng: "2",
-//   });
-// });
-//
-//
-//
 
 // PASS: send LatLng object to API and receive street address
 test("getAddress", () => {
@@ -78,7 +64,7 @@ test("findRestaurants", () => {
 });
 
 // PASS: send lat/lng for origin and destination to server, receive directions
-test.only("fetchDirections", () => {
+test("fetchDirections", () => {
   const expectedObj = {
     geocoded_waypoints: "foo",
     routes: "bar",
@@ -89,18 +75,13 @@ test.only("fetchDirections", () => {
     fetchDirections().then((serverRes) => Object.keys(serverRes))
   ).resolves.toEqual(Object.keys(expectedObj));
 });
-//
 
-//
-//
-//
-// test.only("sendMail", () => {
-//   return expect(sendMail()).resolves.toEqual({ one: "1", two: "2" });
-// });
-//
-//
+// PASS: send email and directions to server, receive 'true' when server successfully sends email
+test.only("sendMail", () => {
+  return expect(sendMail()).resolves.toBe(true);
+});
 //
 
 /**
- * run through and verify each module on client and server side
+ * after passing all tests, go through and verify each module on client and server side
  */

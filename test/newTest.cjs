@@ -25,35 +25,28 @@ require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
  *
  */
 
-// const fetchDirections = () => {
-//   // (origin, dest)
-//   //
+const sendMail = () => {
+  // (directions, recipient)
+  let body = {
+    directions: process.env.MAIL_DIRS,
+    recipient: process.env.MAIL_REC,
+  };
 
-//   const body = {
-//     origin: {
-//       lat: process.env.MY_LAT,
-//       lng: process.env.MY_LNG,
-//     },
-//     dest: {
-//       lat: process.env.D_LAT,
-//       lng: process.env.D_LNG,
-//     },
-//   };
-
-//   return new Promise((resolve, reject) => {
-//     // fetch(`http://localhost:5000/fetch-directions`, {
-//     fetch(`https://quickbite-server.herokuapp.com/fetch-directions`, {
-//       method: "post",
-//       headers: {
-//         Accept: "application/json",
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(body),
-//     })
-//       .then((res) => res.json())
-//       .then((json) => resolve(json));
-//   });
-// };
-// (async () => {
-//   console.log(await fetchDirections());
-// })();
+  return new Promise((resolve, reject) => {
+    // fetch(`https://quickbite-server.herokuapp.com/send-mail`, {
+    fetch(`http://localhost:5000/send-mail`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      //serialize body value
+      body: JSON.stringify(body),
+    })
+      .then((res) => res.json())
+      .then((json) => resolve(json));
+  });
+};
+(async () => {
+  console.log(await sendMail());
+})();
