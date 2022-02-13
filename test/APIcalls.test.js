@@ -38,9 +38,13 @@ test("getCoords", () => {
 //
 //
 
-// pass {lat: 0, lng: 0} to API and receive address
+// send LatLng object to API and receive street address
 test.only("getAddress", () => {
-  return expect(getAddress()).resolves.toEqual({
+  return expect(
+    getAddress().then((ans) => {
+      return ans;
+    })
+  ).resolves.toEqual({
     one: "1",
     two: "2",
   });

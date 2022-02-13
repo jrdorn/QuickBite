@@ -82,9 +82,6 @@ const testBack = () => {
 //
 //|| getAddress
 const getAddress = () => {
-  let myBody = process.env.MY_COORDS;
-  console.log(123, myBody, 1010101010100101010100);
-
   return new Promise((resolve, reject) => {
     fetch(`https://quickbite-server.herokuapp.com/get-address`, {
       method: "post",
@@ -92,7 +89,7 @@ const getAddress = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(myBody),
+      body: JSON.stringify(process.env.MY_COORDS),
     })
       .then((res) => res.json())
       .then((json, err) => {

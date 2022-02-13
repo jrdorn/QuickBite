@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
 
 /**
  *
@@ -24,62 +25,43 @@ require("dotenv").config();
  *
  */
 
-const wifiscanner = require("node-wifiscanner");
+// const getAddress = async () => {
+//   const coords = { lat: process.env.MY_LAT, lng: process.env.MY_LNG };
+//   const response = await fetch(
+//     `https://quickbite-server.herokuapp.com/get-address`,
+//     {
+//       method: "post",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(coords),
+//     }
+//   );
+//   return Promise.resolve(response);
+// };
+// console.log(getAddress());
 
-//find MAC addresses of nearby WiFi access points
-const getMACAddress = () => {
+const getAddress = () => {
+  const coords = { lat: process.env.MY_LAT, lng: process.env.MY_LNG };
+
   return new Promise((resolve, reject) => {
-    wifiscanner.scan((err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        //format MAC addresses for Google Geolocation API
-        let macs = data.map((a) => {
-          let macsObj = {};
-          //WiFi access point objects must have macAddress field
-          macsObj["macAddress"] = a.mac;
-          return macsObj;
-        });
-        //
-        resolve(macs);
-      }
-    });
-  });
-};
+    fetch(`https://quickbite-server.herokuapp.com/get-coords`, {
+      method: "post",
+      headers: {
+        // Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      //serialize body value
+      body: JSON.stringify(coords),
+    })
+      .catch((error) => console.log(error))
 
-const getCoords = (macs) => {
-  return new Promise((resolve, reject) => {
-    let body = {
-      considerIp: "false",
-      wifiAccessPoints: macs,
-    };
-
-    console.log(macs);
-
-    fetch(
-      `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.MAPS_KEY}`,
-      {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        //
-        body: JSON.stringify(body),
-      }
-    )
-      //
       .then((res) => res.json())
-      .then((json, err) => {
-        if (err) {
-          reject(console.log(err));
-        } else {
-          // resolve(console.log(json.error.errors, json.error.details));
-          // resolve(console.log(json.error.details[0]));
-          resolve(console.log(json));
-        }
-      });
+
+      .catch((error) => console.log(error))
+
+      .then((json) => resolve(json));
   });
 };
-
-getMACAddress().then((macs) => getCoords(macs));
+console.log(getAddress());
