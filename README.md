@@ -11,7 +11,7 @@ This project is under development. Future updates will include new ASCII animati
 ## Features
 
 - Find user address via WiFi trilateration
-- Get walking directions to five local restaurants
+- Communicate with [server-side REST API](https://github.com/jrdorn/quickbite-server) to get walking directions to five local restaurants
 - Print directions to screen, send to email, or save as text file
 
 ## Technologies
@@ -21,6 +21,14 @@ QuickBite is created with:
 - Node.js
 - Express
 - Google Maps API
+
+## Installation
+
+Install via NPM:
+
+```
+npm install quickbite -g
+```
 
 ## Usage
 
