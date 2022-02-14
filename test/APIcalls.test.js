@@ -1,14 +1,21 @@
 const {
   getMACAddress,
-
   getCoords,
-
   getAddress,
   validateAddress,
   findRestaurants,
   sendMail,
   fetchDirections,
 } = require("./APIcalls.js");
+
+/**
+ ERRS
+
+|| validate address after entering new one
+FetchError: invalid json response body at https://quickbite-server.herokuapp.com/validate-address reason: Unexpected token < in JSON at position 0
+
+
+ */
 
 //PASS: validate that Heroku server receives validated JSON object, sends a POST request to Maps, and returns an object containing location and accuracy keys
 test("getCoords", () => {
@@ -77,11 +84,13 @@ test("fetchDirections", () => {
 });
 
 // PASS: send email and directions to server, receive 'true' when server successfully sends email
-test.only("sendMail", () => {
+test("sendMail", () => {
   return expect(sendMail()).resolves.toBe(true);
 });
-//
 
 /**
- * after passing all tests, go through and verify each module on client and server side
+ * move keynote file, map to Trello
+ * build and publish to NPM
+ * write README
+ * update Google docs
  */

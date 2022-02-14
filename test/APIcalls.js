@@ -6,12 +6,9 @@ require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
 //
 
 const fetch = require("node-fetch");
-
 const wifiscanner = require("node-wifiscanner");
 
-//
-//
-//
+//|| getMACAddress
 const getMACAddress = () => {
   return new Promise((resolve, reject) => {
     wifiscanner.scan((err, data) => {
@@ -31,9 +28,6 @@ const getMACAddress = () => {
     });
   });
 };
-//
-//
-//
 
 //|| getCoords
 const getCoords = (macs) => {
@@ -56,9 +50,6 @@ const getCoords = (macs) => {
   });
 };
 
-//
-//
-//
 //|| getAddress
 const getAddress = () => {
   const coords = { lat: process.env.MY_LAT, lng: process.env.MY_LNG };
@@ -108,7 +99,6 @@ const findRestaurants = () => {
 
   return new Promise((resolve, reject) => {
     fetch(`https://quickbite-server.herokuapp.com/find-restaurants`, {
-      // fetch(`http://localhost:5000/find-restaurants`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -175,13 +165,9 @@ const fetchDirections = () => {
 };
 
 //exports to test
-
 exports.getMACAddress = getMACAddress;
-
 exports.getCoords = getCoords;
-
 exports.getAddress = getAddress;
-
 exports.validateAddress = validateAddress;
 exports.findRestaurants = findRestaurants;
 exports.sendMail = sendMail;

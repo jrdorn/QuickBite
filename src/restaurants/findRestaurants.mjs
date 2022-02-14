@@ -5,17 +5,19 @@ import fetch from "node-fetch";
 
 //search for restaurants near location
 export let findRestaurants = (addr) => {
-  // fetch(
-  //   `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${addr.myCoords.lat}%2c${addr.myCoords.lng}&rankby=distance&type=restaurant&key=${key}`,
-  //   {
+  //send lat/lng to API
+  const body = {
+    lat: addr.myCoords.lat,
+    lng: addr.myCoords.lng,
+  };
+
   fetch(`https://quickbite-server.herokuapp.com/find-restaurants`, {
     method: "post",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    // body: JSON.stringify(addr),
-    body: JSON.stringify(addr, myCoords),
+    body: JSON.stringify(body),
   })
     .then((res) => res.json())
     .then((json, err) => {

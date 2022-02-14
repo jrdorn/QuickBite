@@ -1,7 +1,7 @@
 import { viewSaveSend } from "../restaurants/viewSaveSend.mjs";
 import boxen from "boxen";
 import chalk from "chalk";
-
+import fetch from "node-fetch";
 import inquirer from "inquirer";
 
 //send directions via email or SMS

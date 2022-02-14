@@ -4,16 +4,26 @@ import fetch from "node-fetch";
 
 //fetch directions and save locally
 export const fetchDirections = (origin, dest) => {
+  //origin and destination geocoordinates to send to API
+  const body = {
+    origin: {
+      lat: origin.lat,
+      lng: origin.lng,
+    },
+    dest: {
+      lat: dest.lat,
+      lng: dest.lng,
+    },
+  };
+
   return new Promise((resolve, reject) => {
-    // fetch(
-    //   `https://maps.googleapis.com/maps/api/directions/json?origin=${origin.lat},${origin.lng}&destination=${dest.lat},${dest.lng}&mode=walking&key=${key}`,
-    //   {
     fetch(`https://quickbite-server.herokuapp.com/fetch-directions`, {
-      method: "get",
+      method: "post",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(body),
     })
       .then((res) => res.json())
       .then((json, err) => {

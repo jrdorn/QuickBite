@@ -4,14 +4,13 @@ import fetch from "node-fetch";
 
 //find lat/lng of user
 export const getCoords = (macAddress) => {
-  let body = {
+  const body = {
     considerIp: "false",
     wifiAccessPoints: macAddress,
   };
 
   return new Promise((resolve, reject) => {
     //send POST request to API
-    // fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${key}`, {
     fetch(`https://quickbite-server.herokuapp.com/get-coords`, {
       method: "post",
       headers: {

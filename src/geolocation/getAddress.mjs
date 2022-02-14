@@ -5,9 +5,6 @@ import fetch from "node-fetch";
 //reverse geocoding - lookup address given lat/lng
 export const getAddress = (coords) => {
   return new Promise((resolve, reject) => {
-    // fetch(
-    //   `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&key=${key}`,
-    //   {
     fetch(`https://quickbite-server.herokuapp.com/get-address`, {
       method: "post",
       headers: {
