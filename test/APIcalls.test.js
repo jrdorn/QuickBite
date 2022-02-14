@@ -87,10 +87,3 @@ test("fetchDirections", () => {
 test("sendMail", () => {
   return expect(sendMail()).resolves.toBe(true);
 });
-
-/**
- * move keynote file, map to Trello
- * build and publish to NPM
- * write README
- * update Google docs
- */
